@@ -442,7 +442,7 @@ namespace AL_Bot
 
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Working Requirements :\n" + "-Device emulated must be the 'Samsung Galaxy S20 Ultra'\n" + "-Emulator window size must be entire window (not full screen, you must see the task bar)\n" + "-Quick retire must be configured");
+            MessageBox.Show("Working Requirements :\n" + "-Device emulated must be the 'Samsung Galaxy S20 Ultra'\n" + "-Emulator window size must be entire window (not full screen, you must see the task bar)\n" + "-Quick retire must be configured" + " \n" + " \n" + "Text Box and 'Launch' / 'Stop' buttons are used to laucnh a certain number of maps by entering the number in the textbox and then clicking launch");
         }
 
         private void button7_Click(object sender, EventArgs e)
