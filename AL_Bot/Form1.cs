@@ -8,7 +8,8 @@ namespace AL_Bot
 {
     public partial class Form1 : Form
     {
-        bool MapFinishTest = false, DockFullTest = false, DoubleMapItemTest = false;
+        bool MapFinishTest = false, DockFullTest = false; 
+        int DoubleMapItemTest = 0;
         int xMax = 0, yMax = 0;
         bool SecScreenIsPos = false;
         int goalCounter = -1, goalNb;
@@ -159,30 +160,38 @@ namespace AL_Bot
             return false;
         }
 
-        private bool CheckDoubleItem()
+        private int CheckDoubleItem()
         {
             Color PixelColor;
+            Color PixelColor2;
             if (checkBox3.Checked == true)
             {
                 PixelColor = GetPixelColor(815, 923);
+                PixelColor2 = GetPixelColor(959, 875);
             }
             else
             {
                 if (SecScreenIsPos)
                 {
                     PixelColor = GetPixelColor(2735, 923);
+                    PixelColor2 = GetPixelColor(2879, 712);
                 }
                 else
                 {
                     PixelColor = GetPixelColor(-1105, 923);
+                    PixelColor2 = GetPixelColor(-961, 712);
                 }
             }
 
-            if (PixelColor.R == 183 && PixelColor.G == 160 && PixelColor.B == 222)
+            if (/*Sans meta*/PixelColor.R == 183 && PixelColor.G == 160 && PixelColor.B == 222)                
             {
-                return true;
+                return 1;
             }
-            return false;
+            else if (/*Avec meta*/ PixelColor2.R == 107 && PixelColor2.G == 101 && PixelColor2.B == 173)
+            {
+                return 2;
+            }
+            return 0;
         }
 
         private bool CheckDockFull()
@@ -306,15 +315,54 @@ namespace AL_Bot
             MapFinishTest = CheckMapFinish();
             if (MapFinishTest)
             {
-                if(goalCounter >= 0)
+                if(goalCounter >= 0)//si mode compteur
                 {
                     if (checkBox4.Checked == true)//If double map item wanted
                     {
                         DoubleMapItemTest = CheckDoubleItem();
-                        if (DoubleMapItemTest)
+                        if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
                         {
-                            DoMouseClick(1089, 899);
-                            Thread.Sleep(1000);
+                            if (checkBox3.Checked == true)
+                            {
+                                DoMouseClick(1089, 899);
+                                Thread.Sleep(1000);
+                            }
+                            if (checkBox2.Checked == true)
+                            {
+                                if (SecScreenIsPos)
+                                {
+                                    DoMouseClick(3009, 899);
+                                    Thread.Sleep(1000);
+                                }
+                                else
+                                {
+                                    DoMouseClick(-831, 899);
+                                    Thread.Sleep(1000);
+                                }
+                            }
+                            DoubleMapItemTest = 0;
+                        }
+                        else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
+                        {
+                            if (checkBox3.Checked == true)
+                            {
+                                DoMouseClick(1188, 906);
+                                Thread.Sleep(1000);
+                            }
+                            if (checkBox2.Checked == true)
+                            {
+                                if (SecScreenIsPos)
+                                {
+                                    DoMouseClick(3108, 906);
+                                    Thread.Sleep(1000);
+                                }
+                                else
+                                {
+                                    DoMouseClick(-732, 906);
+                                    Thread.Sleep(1000);
+                                }
+                            }
+                            DoubleMapItemTest = 0;
                         }
                     }
 
@@ -346,14 +394,50 @@ namespace AL_Bot
                 }
                 else
                 {
-                    if (checkBox4.Checked == true)//If double map item wanted
+                    DoubleMapItemTest = CheckDoubleItem();
+                    if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
                     {
-                        DoubleMapItemTest = CheckDoubleItem();
-                        if (DoubleMapItemTest)
+                        if (checkBox3.Checked == true)
                         {
                             DoMouseClick(1089, 899);
                             Thread.Sleep(1000);
                         }
+                        if (checkBox2.Checked == true)
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                DoMouseClick(3009, 899);
+                                Thread.Sleep(1000);
+                            }
+                            else
+                            {
+                                DoMouseClick(-831, 899);
+                                Thread.Sleep(1000);
+                            }
+                        }
+                        DoubleMapItemTest = 0;
+                    }
+                    else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
+                    {
+                        if (checkBox3.Checked == true)
+                        {
+                            DoMouseClick(1188, 906);
+                            Thread.Sleep(1000);
+                        }
+                        if (checkBox2.Checked == true)
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                DoMouseClick(3108, 906);
+                                Thread.Sleep(1000);
+                            }
+                            else
+                            {
+                                DoMouseClick(-732, 906);
+                                Thread.Sleep(1000);
+                            }
+                        }
+                        DoubleMapItemTest = 0;
                     }
 
                     if (checkBox3.Checked == true)
