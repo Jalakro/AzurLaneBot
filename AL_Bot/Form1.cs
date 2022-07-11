@@ -136,24 +136,68 @@ namespace AL_Bot
 
         private bool CheckMapFinish()
         {
-            Color PixelColor;
-            if(checkBox3.Checked == true)
+            if (xMax != 1920 && yMax != 1080)
             {
-                PixelColor = GetPixelColor(1300, 900);
+                int PixelToTest_X = 1300, PixelToTest_Y = 900;
+
+                Color[] PixelColor = new Color[4]; // dans cet ordre : x, x+1, y, y+1
+
+                for (int i = 0; i < 4; i++)
+                {
+                    int tmpPixel_X = PixelToTest_X, tmpPixel_Y = PixelToTest_Y;
+
+                    if (i == 1 || i == 3)
+                    {
+                        tmpPixel_X += 1;
+                    }
+                    if (i == 2 || i == 3)
+                    {
+                        tmpPixel_Y += 1;
+                    }
+
+                    if (checkBox3.Checked == true)
+                    {
+                        PixelColor[i] = GetPixelColor(tmpPixel_X, tmpPixel_Y);
+                    }
+                    else
+                    {
+                        if (SecScreenIsPos)
+                        {
+                            PixelColor[i] = GetPixelColor(tmpPixel_X + 1920, tmpPixel_Y);
+                        }
+                        else
+                        {
+                            PixelColor[i] = GetPixelColor(tmpPixel_X - 1920, tmpPixel_Y);
+                        }
+                    }
+
+                    if (/*Avec meta*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 222 || /*Avec meta n°2*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 229 || /*Sans meta*/ PixelColor[i].R == 90 && PixelColor[i].G == 142 && PixelColor[i].B == 214)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            Color PixelColor_;
+
+            if (checkBox3.Checked == true)
+            {
+                PixelColor_ = GetPixelColor(1300, 900);
             }
             else
             {
                 if (SecScreenIsPos)
                 {
-                    PixelColor = GetPixelColor(3220, 900);
+                    PixelColor_ = GetPixelColor(3220, 900);
                 }
                 else
                 {
-                    PixelColor = GetPixelColor(-620, 900);
+                    PixelColor_ = GetPixelColor(-620, 900);
                 }
             }
-                
-            if (/*Avec meta*/PixelColor.R == 176 && PixelColor.G == 196 && PixelColor.B == 222 || /*Avec meta n°2*/PixelColor.R == 176 && PixelColor.G == 196 && PixelColor.B == 229 || /*Sans meta*/ PixelColor.R == 90 && PixelColor.G == 142 && PixelColor.B == 214)
+
+            if (/*Avec meta*/PixelColor_.R == 176 && PixelColor_.G == 196 && PixelColor_.B == 222 || /*Avec meta n°2*/PixelColor_.R == 176 && PixelColor_.G == 196 && PixelColor_.B == 229 || /*Sans meta*/ PixelColor_.R == 90 && PixelColor_.G == 142 && PixelColor_.B == 214)
             {
                 return true;
             }
@@ -162,8 +206,67 @@ namespace AL_Bot
 
         private int CheckDoubleItem()
         {
+            if (xMax != 1920 && yMax != 1080)
+            {
+                int[] PixelToTest_X = new int[2];
+                PixelToTest_X[0] = 815;
+                PixelToTest_X[1] = 959;
+                int[] PixelToTest_Y = new int[2];
+                PixelToTest_Y[0] = 923;
+                PixelToTest_Y[1] = 875;
+
+                Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
+                PixelColor_[0] = new Color[4];
+                PixelColor_[1] = new Color[4];
+
+
+                for (int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        int tmpPixel_X = PixelToTest_X[i], tmpPixel_Y = PixelToTest_Y[i];
+
+                        if (j == 1 || j == 3)
+                        {
+                            tmpPixel_X += 1;
+                        }
+                        if (j == 2 || j == 3)
+                        {
+                            tmpPixel_Y += 1;
+                        }
+
+                        if (checkBox3.Checked == true)
+                        {
+                            PixelColor_[i][j] = GetPixelColor(tmpPixel_X, tmpPixel_Y);
+                        }
+                        else
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + 1920, tmpPixel_Y);
+                            }
+                            else
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - 1920, tmpPixel_Y);
+                            }
+                        }
+
+                        if (/*Sans meta*/PixelColor_[i][j].R == 183 && PixelColor_[i][j].G == 160 && PixelColor_[i][j].B == 222)
+                        {
+                            return 1;
+                        }
+                        else if (/*Avec meta*/ PixelColor_[i][j].R == 107 && PixelColor_[i][j].G == 101 && PixelColor_[i][j].B == 173)
+                        {
+                            return 2;
+                        }
+                    }
+                    return 0;
+                }
+            }
+
             Color PixelColor;
             Color PixelColor2;
+
             if (checkBox3.Checked == true)
             {
                 PixelColor = GetPixelColor(815, 923);
@@ -174,12 +277,12 @@ namespace AL_Bot
                 if (SecScreenIsPos)
                 {
                     PixelColor = GetPixelColor(2735, 923);
-                    PixelColor2 = GetPixelColor(2879, 712);
+                    PixelColor2 = GetPixelColor(2879, 875);
                 }
                 else
                 {
                     PixelColor = GetPixelColor(-1105, 923);
-                    PixelColor2 = GetPixelColor(-961, 712);
+                    PixelColor2 = GetPixelColor(-961, 875);
                 }
             }
 
@@ -196,8 +299,63 @@ namespace AL_Bot
 
         private bool CheckDockFull()
         {
+            if (xMax != 1920 && yMax != 1080)
+            {
+                int[] PixelToTest_X = new int[2];
+                PixelToTest_X[0] = 1347;
+                PixelToTest_X[1] = 562;
+                int[] PixelToTest_Y = new int[2];
+                PixelToTest_Y[0] = 338;
+                PixelToTest_Y[1] = 712;
+
+                Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
+                PixelColor_[0] = new Color[4];
+                PixelColor_[1] = new Color[4];
+                
+
+                for(int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        int tmpPixel_X = PixelToTest_X[i], tmpPixel_Y = PixelToTest_Y[i];
+
+                        if (j == 1 || j == 3)
+                        {
+                            tmpPixel_X += 1;
+                        }
+                        if (j == 2 || j == 3)
+                        {
+                            tmpPixel_Y += 1;
+                        }
+
+                        if (checkBox3.Checked == true)
+                        {
+                            PixelColor_[i][j] = GetPixelColor(tmpPixel_X, tmpPixel_Y);
+                        }
+                        else
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + 1920, tmpPixel_Y);
+                            }
+                            else
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - 1920, tmpPixel_Y);
+                            }
+                        }
+
+                        if (/*Avec meta*/PixelColor_[i][j].R == 176 && PixelColor_[i][j].G == 196 && PixelColor_[i][j].B == 222 || /*Avec meta n°2*/PixelColor_[i][j].R == 176 && PixelColor_[i][j].G == 196 && PixelColor_[i][j].B == 229 || /*Sans meta*/ PixelColor_[i][j].R == 90 && PixelColor_[i][j].G == 142 && PixelColor_[i][j].B == 214)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+
             Color PixelColor;
             Color PixelColor2;
+
             if (checkBox3.Checked == true)
             {
                 PixelColor = GetPixelColor(1347, 338);
