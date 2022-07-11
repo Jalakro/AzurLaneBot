@@ -552,52 +552,55 @@ namespace AL_Bot
                 }
                 else
                 {
-                    DoubleMapItemTest = CheckDoubleItem();
-                    if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
+                    if (checkBox4.Checked == true)//If double map item wanted
                     {
-                        if (checkBox3.Checked == true)
+                        DoubleMapItemTest = CheckDoubleItem();
+                        if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
                         {
-                            DoMouseClick(1089, 899);
-                            Thread.Sleep(1000);
-                        }
-                        if (checkBox2.Checked == true)
-                        {
-                            if (SecScreenIsPos)
+                            if (checkBox3.Checked == true)
                             {
-                                DoMouseClick(3009, 899);
+                                DoMouseClick(1089, 899);
                                 Thread.Sleep(1000);
                             }
-                            else
+                            if (checkBox2.Checked == true)
                             {
-                                DoMouseClick(-831, 899);
+                                if (SecScreenIsPos)
+                                {
+                                    DoMouseClick(3009, 899);
+                                    Thread.Sleep(1000);
+                                }
+                                else
+                                {
+                                    DoMouseClick(-831, 899);
+                                    Thread.Sleep(1000);
+                                }
+                            }
+                            DoubleMapItemTest = 0;
+                        }
+                        else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
+                        {
+                            if (checkBox3.Checked == true)
+                            {
+                                DoMouseClick(1188, 906);
                                 Thread.Sleep(1000);
                             }
+                            if (checkBox2.Checked == true)
+                            {
+                                if (SecScreenIsPos)
+                                {
+                                    DoMouseClick(3108, 906);
+                                    Thread.Sleep(1000);
+                                }
+                                else
+                                {
+                                    DoMouseClick(-732, 906);
+                                    Thread.Sleep(1000);
+                                }
+                            }
+                            DoubleMapItemTest = 0;
                         }
-                        DoubleMapItemTest = 0;
                     }
-                    else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
-                    {
-                        if (checkBox3.Checked == true)
-                        {
-                            DoMouseClick(1188, 906);
-                            Thread.Sleep(1000);
-                        }
-                        if (checkBox2.Checked == true)
-                        {
-                            if (SecScreenIsPos)
-                            {
-                                DoMouseClick(3108, 906);
-                                Thread.Sleep(1000);
-                            }
-                            else
-                            {
-                                DoMouseClick(-732, 906);
-                                Thread.Sleep(1000);
-                            }
-                        }
-                        DoubleMapItemTest = 0;
-                    }
-
+                        
                     if (checkBox3.Checked == true)
                     {
                         DoMouseClick(1300, 900);
