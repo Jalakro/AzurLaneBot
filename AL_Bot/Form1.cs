@@ -16,6 +16,7 @@ namespace AL_Bot
         Screen[] screens;
 
         //données et fonction pour faire un click
+        #region
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
@@ -23,9 +24,11 @@ namespace AL_Bot
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
+        #endregion
         //
 
         //Get les pixels de l'écran
+        #region
         [DllImport("user32.dll")]
         static extern IntPtr GetDC(IntPtr hwnd);
 
@@ -34,6 +37,7 @@ namespace AL_Bot
 
         [DllImport("gdi32.dll")]
         static extern uint GetPixel(IntPtr hdc, int nXPos, int nYPos);
+        #endregion
         //
 
         public Form1()
@@ -83,6 +87,9 @@ namespace AL_Bot
             myTimer.Enabled = false;
         }
 
+
+        //Buttons Functions
+        #region
         private void button1_Click(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
@@ -96,6 +103,90 @@ namespace AL_Bot
                 checkBox1.Checked = true;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Cursor = new Cursor(Cursor.Current.Handle);
+            Color tmp = GetPixelColor(Cursor.Position.X, Cursor.Position.Y);
+            MessageBox.Show("X :" + Cursor.Position.X + " Y :" + Cursor.Position.Y + " RGB :" + tmp.R + " " + tmp.G + " " + tmp.B);
+        }
+
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked == true)
+            {
+                checkBox2.Checked = true;
+                checkBox3.Checked = false;
+            }
+            else
+            {
+                checkBox2.Checked = false;
+                checkBox3.Checked = true;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Working Requirements :\n" + "-Device emulated must be the 'Samsung Galaxy S20 Ultra'\n" + "-Emulator window size must be entire window (not full screen, you must see the task bar)\n" + "-Quick retire must be configured" + " \n" + " \n" + "Text Box and 'Launch' / 'Stop' buttons are used to laucnh a certain number of maps by entering the number in the textbox and then clicking launch");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked == true)
+            {
+                checkBox4.Checked = false;
+            }
+            else
+            {
+                checkBox4.Checked = true;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            bool successfullyParsed = int.TryParse(textBox1.Text, out goalNb);
+
+            if (successfullyParsed && goalNb > 0)
+            {
+                if (checkBox1.Checked == true)
+                {
+                    myTimer.Enabled = false;
+                    checkBox1.Checked = false;
+                }
+                goalCounter = 0;
+                button1.Enabled = false;
+                myTimer.Enabled = true;
+                button8.Enabled = false;
+                textBox1.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Texte entrée non valide");
+            }
+        }
+
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (button8.Enabled == false && goalCounter >= 0)
+            {
+                myTimer.Enabled = false;
+                button1.Enabled = true;
+                goalCounter = -1;
+                button8.Enabled = true;
+                textBox1.Enabled = true;
+                textBox1.Text = "";
+            }
+        }
+        #endregion
+
+
 
         public void DoMouseClick(int X, int Y)
         {
@@ -121,7 +212,6 @@ namespace AL_Bot
 
             Cursor.Position = new Point(pre_x, pre_y);
         }
-
 
         static public System.Drawing.Color GetPixelColor(int x, int y)
         {
@@ -202,6 +292,150 @@ namespace AL_Bot
                 return true;
             }
             return false;
+        }
+
+        private void RelaunchMap()
+        {
+            if (checkBox3.Checked == true)
+            {
+                DoMouseClick(1300, 900);
+                Thread.Sleep(1000);
+            }
+            if (checkBox2.Checked == true)
+            {
+                if (SecScreenIsPos)
+                {
+                    DoMouseClick(3220, 900);
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    DoMouseClick(-620, 900);
+                    Thread.Sleep(1000);
+                }
+            }
+        }
+
+        private void ActivateDoubleMapItem()
+        {
+            DoubleMapItemTest = CheckDoubleItem();
+            if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
+            {
+                if (checkBox3.Checked == true)
+                {
+                    DoMouseClick(1089, 899);
+                    Thread.Sleep(1000);
+                }
+                if (checkBox2.Checked == true)
+                {
+                    if (SecScreenIsPos)
+                    {
+                        DoMouseClick(3009, 899);
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        DoMouseClick(-831, 899);
+                        Thread.Sleep(1000);
+                    }
+                }
+                DoubleMapItemTest = 0;
+            }
+            else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
+            {
+                if (checkBox3.Checked == true)
+                {
+                    DoMouseClick(1188, 906);
+                    Thread.Sleep(1000);
+                }
+                if (checkBox2.Checked == true)
+                {
+                    if (SecScreenIsPos)
+                    {
+                        DoMouseClick(3108, 906);
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        DoMouseClick(-732, 906);
+                        Thread.Sleep(1000);
+                    }
+                }
+                DoubleMapItemTest = 0;
+            }
+        }
+
+        private void SortDock()
+        {
+            if (checkBox3.Checked == true)
+            {
+                DoMouseClick(730, 750);
+                Thread.Sleep(4000);
+                DoMouseClick(1050, 970);
+                Thread.Sleep(1500);
+                DoMouseClick(1450, 930);
+                Thread.Sleep(1500);
+                DoMouseClick(1150, 720);
+                Thread.Sleep(1500);
+                DoMouseClick(1150, 720);
+                Thread.Sleep(1500);
+                DoMouseClick(1370, 790);
+                Thread.Sleep(1500);
+                DoMouseClick(1170, 830);
+                Thread.Sleep(1500);
+                DoMouseClick(1170, 830);
+                Thread.Sleep(1500);
+                DoMouseClick(1340, 960);
+                Thread.Sleep(4000);
+                DoMouseClick(1750, 800);
+            }
+            if (checkBox2.Checked == true)
+            {
+                if (SecScreenIsPos)
+                {
+                    DoMouseClick(2650, 750);
+                    Thread.Sleep(4000);
+                    DoMouseClick(2970, 970);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3370, 930);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3070, 720);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3070, 720);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3290, 790);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3090, 830);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3090, 830);
+                    Thread.Sleep(1500);
+                    DoMouseClick(3260, 960);
+                    Thread.Sleep(4000);
+                    DoMouseClick(3670, 800);
+                }
+                else
+                {
+                    DoMouseClick(-1190, 750);
+                    Thread.Sleep(4000);
+                    DoMouseClick(-870, 970);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-470, 930);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-770, 720);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-770, 720);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-550, 790);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-750, 830);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-750, 830);
+                    Thread.Sleep(1500);
+                    DoMouseClick(-580, 960);
+                    Thread.Sleep(4000);
+                    DoMouseClick(-170, 800);
+                }
+            }
         }
 
         private int CheckDoubleItem()
@@ -382,6 +616,8 @@ namespace AL_Bot
             return false;
         }
 
+
+
         private void myTimer_Tick(object sender, EventArgs e)
         {
             if(checkBox3.Checked == true)
@@ -399,75 +635,7 @@ namespace AL_Bot
             DockFullTest = CheckDockFull();
             if (DockFullTest)
             {
-                if(checkBox3.Checked == true)
-                {
-                    DoMouseClick(730, 750);
-                    Thread.Sleep(4000);
-                    DoMouseClick(1050, 970);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1450, 930);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1150, 720);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1150, 720);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1370, 790);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1170, 830);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1170, 830);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1340, 960);
-                    Thread.Sleep(4000);
-                    DoMouseClick(1750, 800);
-                }
-                if(checkBox2.Checked == true)
-                {
-                    if (SecScreenIsPos)
-                    {
-                        DoMouseClick(2650, 750);
-                        Thread.Sleep(4000);
-                        DoMouseClick(2970, 970);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3370, 930);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3070, 720);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3070, 720);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3290, 790);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3090, 830);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3090, 830);
-                        Thread.Sleep(1500);
-                        DoMouseClick(3260, 960);
-                        Thread.Sleep(4000);
-                        DoMouseClick(3670, 800);
-                    }
-                    else
-                    {
-                        DoMouseClick(-1190, 750);
-                        Thread.Sleep(4000);
-                        DoMouseClick(-870, 970);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-470, 930);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-770, 720);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-770, 720);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-550, 790);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-750, 830);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-750, 830);
-                        Thread.Sleep(1500);
-                        DoMouseClick(-580, 960);
-                        Thread.Sleep(4000);
-                        DoMouseClick(-170, 800);
-                    }
-                }
+                SortDock();
             }
 
             MapFinishTest = CheckMapFinish();
@@ -477,68 +645,11 @@ namespace AL_Bot
                 {
                     if (checkBox4.Checked == true)//If double map item wanted
                     {
-                        DoubleMapItemTest = CheckDoubleItem();
-                        if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
-                        {
-                            if (checkBox3.Checked == true)
-                            {
-                                DoMouseClick(1089, 899);
-                                Thread.Sleep(1000);
-                            }
-                            if (checkBox2.Checked == true)
-                            {
-                                if (SecScreenIsPos)
-                                {
-                                    DoMouseClick(3009, 899);
-                                    Thread.Sleep(1000);
-                                }
-                                else
-                                {
-                                    DoMouseClick(-831, 899);
-                                    Thread.Sleep(1000);
-                                }
-                            }
-                            DoubleMapItemTest = 0;
-                        }
-                        else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
-                        {
-                            if (checkBox3.Checked == true)
-                            {
-                                DoMouseClick(1188, 906);
-                                Thread.Sleep(1000);
-                            }
-                            if (checkBox2.Checked == true)
-                            {
-                                if (SecScreenIsPos)
-                                {
-                                    DoMouseClick(3108, 906);
-                                    Thread.Sleep(1000);
-                                }
-                                else
-                                {
-                                    DoMouseClick(-732, 906);
-                                    Thread.Sleep(1000);
-                                }
-                            }
-                            DoubleMapItemTest = 0;
-                        }
+                        ActivateDoubleMapItem();
                     }
 
-                    if (checkBox3.Checked == true)
-                    {
-                        DoMouseClick(1300, 900);
-                    }
-                    if (checkBox2.Checked == true)
-                    {
-                        if (SecScreenIsPos)
-                        {
-                            DoMouseClick(3220, 900);
-                        }
-                        else
-                        {
-                            DoMouseClick(-620, 900);
-                        }
-                    }
+                    RelaunchMap();
+
                     goalCounter++;
                     if (goalCounter >= goalNb)
                     {
@@ -554,153 +665,14 @@ namespace AL_Bot
                 {
                     if (checkBox4.Checked == true)//If double map item wanted
                     {
-                        DoubleMapItemTest = CheckDoubleItem();
-                        if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
-                        {
-                            if (checkBox3.Checked == true)
-                            {
-                                DoMouseClick(1089, 899);
-                                Thread.Sleep(1000);
-                            }
-                            if (checkBox2.Checked == true)
-                            {
-                                if (SecScreenIsPos)
-                                {
-                                    DoMouseClick(3009, 899);
-                                    Thread.Sleep(1000);
-                                }
-                                else
-                                {
-                                    DoMouseClick(-831, 899);
-                                    Thread.Sleep(1000);
-                                }
-                            }
-                            DoubleMapItemTest = 0;
-                        }
-                        else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
-                        {
-                            if (checkBox3.Checked == true)
-                            {
-                                DoMouseClick(1188, 906);
-                                Thread.Sleep(1000);
-                            }
-                            if (checkBox2.Checked == true)
-                            {
-                                if (SecScreenIsPos)
-                                {
-                                    DoMouseClick(3108, 906);
-                                    Thread.Sleep(1000);
-                                }
-                                else
-                                {
-                                    DoMouseClick(-732, 906);
-                                    Thread.Sleep(1000);
-                                }
-                            }
-                            DoubleMapItemTest = 0;
-                        }
+                        ActivateDoubleMapItem();
                     }
-                        
-                    if (checkBox3.Checked == true)
-                    {
-                        DoMouseClick(1300, 900);
-                    }
-                    if (checkBox2.Checked == true)
-                    {
-                        if (SecScreenIsPos)
-                        {
-                            DoMouseClick(3220, 900);
-                        }
-                        else
-                        {
-                            DoMouseClick(-620, 900);
-                        }
-                    }
+
+                    RelaunchMap();
                 }
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.Application.Exit();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.Cursor = new Cursor(Cursor.Current.Handle);
-            Color tmp = GetPixelColor(Cursor.Position.X, Cursor.Position.Y);
-            MessageBox.Show("X :" + Cursor.Position.X + " Y :" + Cursor.Position.Y + " RGB :" + tmp.R + " " + tmp.G + " " + tmp.B);
-        }
-
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (checkBox3.Checked == true)
-            {
-                checkBox2.Checked = true;
-                checkBox3.Checked = false;
-            }
-            else
-            {
-                checkBox2.Checked = false;
-                checkBox3.Checked = true;
-            }
-        }
-
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            bool successfullyParsed = int.TryParse(textBox1.Text, out goalNb);
-
-            if (successfullyParsed && goalNb > 0)
-            {
-                if(checkBox1.Checked == true)
-                {
-                    myTimer.Enabled = false;
-                    checkBox1.Checked = false;
-                }
-                goalCounter = 0;
-                button1.Enabled = false;
-                myTimer.Enabled = true;
-                button8.Enabled = false;
-                textBox1.Enabled = false;
-            }
-            else
-            {
-                MessageBox.Show("Texte entrée non valide");
-            }
-        }
-
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if(button8.Enabled == false && goalCounter >= 0)
-            {
-                myTimer.Enabled = false;
-                button1.Enabled = true;
-                goalCounter = -1;
-                button8.Enabled = true; 
-                textBox1.Enabled = true;
-                textBox1.Text = "";
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Working Requirements :\n" + "-Device emulated must be the 'Samsung Galaxy S20 Ultra'\n" + "-Emulator window size must be entire window (not full screen, you must see the task bar)\n" + "-Quick retire must be configured" + " \n" + " \n" + "Text Box and 'Launch' / 'Stop' buttons are used to laucnh a certain number of maps by entering the number in the textbox and then clicking launch");
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if(checkBox4.Checked == true)
-            {
-                checkBox4.Checked = false;
-            }
-            else
-            {
-                checkBox4.Checked = true;
-            }
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
