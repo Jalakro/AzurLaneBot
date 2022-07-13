@@ -8,11 +8,12 @@ namespace AL_Bot
 {
     public partial class Form1 : Form
     {
-        bool MapFinishTest = false, DockFullTest = false; 
-        int DoubleMapItemTest = 0;
+        bool MapFinishTest = false, DockFullTest = false, IsExercise = false, ExerciseAsked = false; 
+        int DoubleMapItemTest = 0, ExerciseWinLoseTest = 0;
         int xMax = 0, yMax = 0;
         bool SecScreenIsPos = false;
         int goalCounter = -1, goalNb;
+        int goalCounterExercise = -1, goalNbExercise;
         Screen[] screens;
 
         //données et fonction pour faire un click
@@ -131,9 +132,24 @@ namespace AL_Bot
             }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (button8.Enabled == false && goalCounterExercise >= 0)
+            {
+                myTimer.Enabled = false;
+                button1.Enabled = true;
+                goalCounterExercise = -1;
+                ExerciseAsked = false;
+                button8.Enabled = true;
+                checkBox7.Checked = false;
+                button11.Enabled = true;
+                button10.Enabled = true;
+            }
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Working Requirements :\n" + "-Device emulated must be the 'Samsung Galaxy S20 Ultra'\n" + "-Emulator window size must be entire window (not full screen, you must see the task bar)\n" + "-Quick retire must be configured" + " \n" + " \n" + "Text Box and 'Launch' / 'Stop' buttons are used to laucnh a certain number of maps by entering the number in the textbox and then clicking launch");
+            MessageBox.Show("Working Requirements :\n" + "-Device emulated must be the 'Samsung Galaxy S20 Ultra'\n" + "-Emulator window size must be entire window (not full screen, you must see the task bar)\n" + "-Quick retire must be configured" + " \n" + " \n" + "Text Box and 'Launch' / 'Stop' buttons are used to launch a certain number of maps by entering the number in the textbox and then clicking launch");
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -182,6 +198,46 @@ namespace AL_Bot
                 button8.Enabled = true;
                 textBox1.Enabled = true;
                 textBox1.Text = "";
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            ExerciseAsked = true;
+
+            if (checkBox1.Checked == true)
+            {
+                myTimer.Enabled = false;
+                checkBox1.Checked = false;
+            }
+            goalCounterExercise = 0;
+            if(checkBox5.Checked == true)
+            {
+                goalNbExercise = 5;
+            }
+            else if(checkBox6.Checked == true)
+            {
+                goalNbExercise = 10;
+            }
+            button1.Enabled = false;
+            myTimer.Enabled = true;
+            button8.Enabled = false;
+            button11.Enabled = false;
+            button10.Enabled = false;
+            checkBox7.Checked = true;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                checkBox6.Checked = true;
+                checkBox5.Checked = false;
+            }
+            else
+            {
+                checkBox6.Checked = false;
+                checkBox5.Checked = true;
             }
         }
         #endregion
@@ -236,6 +292,10 @@ namespace AL_Bot
                 {
                     int tmpPixel_X = PixelToTest_X, tmpPixel_Y = PixelToTest_Y;
 
+                    tmpPixel_X = tmpPixel_X * xMax / 1920;
+                    tmpPixel_Y = tmpPixel_Y * yMax / 1080;
+
+
                     if (i == 1 || i == 3)
                     {
                         tmpPixel_X += 1;
@@ -253,15 +313,16 @@ namespace AL_Bot
                     {
                         if (SecScreenIsPos)
                         {
-                            PixelColor[i] = GetPixelColor(tmpPixel_X + 1920, tmpPixel_Y);
+                            PixelColor[i] = GetPixelColor(tmpPixel_X + xMax, tmpPixel_Y);
                         }
                         else
                         {
-                            PixelColor[i] = GetPixelColor(tmpPixel_X - 1920, tmpPixel_Y);
+                            PixelColor[i] = GetPixelColor(tmpPixel_X - xMax, tmpPixel_Y);
                         }
                     }
 
-                    if (/*Avec meta*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 222 || /*Avec meta n°2*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 229 || /*Sans meta*/ PixelColor[i].R == 90 && PixelColor[i].G == 142 && PixelColor[i].B == 214)
+                    //(/*Avec meta*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 222 || /*Avec meta n°2*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 229 || /*Sans meta*/ PixelColor[i].R == 90 && PixelColor[i].G == 142 && PixelColor[i].B == 214)
+                    if (/*Avec meta*/PixelColor[i].R >= 166 && PixelColor[i].G >= 186 && PixelColor[i].B >= 212 && PixelColor[i].R <= 186 && PixelColor[i].G <= 206 && PixelColor[i].B <= 232 || /*Avec meta n°2*/PixelColor[i].R >= 166 && PixelColor[i].G >= 186 && PixelColor[i].B >= 219 && PixelColor[i].R <= 186 && PixelColor[i].G <= 206 && PixelColor[i].B <= 239 || /*Sans meta*/ PixelColor[i].R >= 80 && PixelColor[i].G >= 132 && PixelColor[i].B >= 204 && PixelColor[i].R <= 100 && PixelColor[i].G <= 152 && PixelColor[i].B <= 224)
                     {
                         return true;
                     }
@@ -313,6 +374,10 @@ namespace AL_Bot
                     DoMouseClick(-620, 900);
                     Thread.Sleep(1000);
                 }
+            }
+            if(button8.Enabled == false)
+            {
+                goalCounter++;
             }
         }
 
@@ -449,6 +514,11 @@ namespace AL_Bot
                 PixelToTest_Y[0] = 923;
                 PixelToTest_Y[1] = 875;
 
+                PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
+                PixelToTest_X[1] = PixelToTest_X[1] * xMax / 1920;
+                PixelToTest_Y[0] = PixelToTest_Y[0] * yMax / 1080;
+                PixelToTest_Y[1] = PixelToTest_Y[1] * yMax / 1080;
+
                 Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
                 PixelColor_[0] = new Color[4];
                 PixelColor_[1] = new Color[4];
@@ -477,11 +547,11 @@ namespace AL_Bot
                         {
                             if (SecScreenIsPos)
                             {
-                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + 1920, tmpPixel_Y);
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + xMax, tmpPixel_Y);
                             }
                             else
                             {
-                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - 1920, tmpPixel_Y);
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - xMax, tmpPixel_Y);
                             }
                         }
 
@@ -542,6 +612,11 @@ namespace AL_Bot
                 PixelToTest_Y[0] = 338;
                 PixelToTest_Y[1] = 712;
 
+                PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
+                PixelToTest_X[1] = PixelToTest_X[1] * xMax / 1920;
+                PixelToTest_Y[0] = PixelToTest_Y[0] * yMax / 1080;
+                PixelToTest_Y[1] = PixelToTest_Y[1] * yMax / 1080;
+
                 Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
                 PixelColor_[0] = new Color[4];
                 PixelColor_[1] = new Color[4];
@@ -570,11 +645,11 @@ namespace AL_Bot
                         {
                             if (SecScreenIsPos)
                             {
-                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + 1920, tmpPixel_Y);
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + xMax, tmpPixel_Y);
                             }
                             else
                             {
-                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - 1920, tmpPixel_Y);
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - xMax, tmpPixel_Y);
                             }
                         }
 
@@ -616,6 +691,321 @@ namespace AL_Bot
             return false;
         }
 
+        private bool CheckIfExercise()
+        {
+            if (xMax != 1920 && yMax != 1080)
+            {
+                int[] PixelToTest_X = new int[2];
+                PixelToTest_X[0] = 457;
+                PixelToTest_X[1] = 1331;
+                int[] PixelToTest_Y = new int[2];
+                PixelToTest_Y[0] = 567;
+                PixelToTest_Y[1] = 567;
+
+                PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
+                PixelToTest_X[1] = PixelToTest_X[1] * xMax / 1920;
+                PixelToTest_Y[0] = PixelToTest_Y[0] * yMax / 1080;
+                PixelToTest_Y[1] = PixelToTest_Y[1] * yMax / 1080;
+
+                Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
+                PixelColor_[0] = new Color[4];
+                PixelColor_[1] = new Color[4];
+
+                int count = 0; //need both pixels to be detected
+
+
+                for (int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        int tmpPixel_X = PixelToTest_X[i], tmpPixel_Y = PixelToTest_Y[i];
+
+                        if (j == 1 || j == 3)
+                        {
+                            tmpPixel_X += 1;
+                        }
+                        if (j == 2 || j == 3)
+                        {
+                            tmpPixel_Y += 1;
+                        }
+
+                        if (checkBox3.Checked == true)
+                        {
+                            PixelColor_[i][j] = GetPixelColor(tmpPixel_X, tmpPixel_Y);
+                        }
+                        else
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + xMax, tmpPixel_Y);
+                            }
+                            else
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - xMax, tmpPixel_Y);
+                            }
+                        }
+
+                        if (/*premier joueur*/PixelColor_[i][j].R == 193 && PixelColor_[i][j].G == 197 || PixelColor_[i][j].B == 200 || /*deuxieme joueur*/PixelColor_[i][j].R == 198 && PixelColor_[i][j].G == 203 && PixelColor_[i][j].B == 206)
+                        {
+                            count++;
+                        }
+                    }
+                }
+
+                if (count >= 2)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            Color PixelColor;
+            Color PixelColor2;
+
+            if (checkBox3.Checked == true)
+            {
+                PixelColor = GetPixelColor(457, 567);
+                PixelColor2 = GetPixelColor(1331, 567);
+            }
+            else
+            {
+                if (SecScreenIsPos)
+                {
+                    PixelColor = GetPixelColor(2377, 567);
+                    PixelColor2 = GetPixelColor(3251, 567);
+                }
+                else
+                {
+                    PixelColor = GetPixelColor(-1463, 567);
+                    PixelColor2 = GetPixelColor(-589, 567);
+                }
+            }
+
+            if (PixelColor.R == 193 && PixelColor.R <= 197 && PixelColor.G >= 200 || PixelColor2.R == 198 && PixelColor2.G == 203 && PixelColor2.B == 206)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void LaunchExerciseAttack()
+        {
+            IsExercise = CheckIfExercise();
+            if(IsExercise == true)
+            {
+                if (checkBox3.Checked == true)
+                {
+                    DoMouseClick(337, 405);
+                    Thread.Sleep(1000);
+                    DoMouseClick(941, 828);
+                    Thread.Sleep(2000);
+                    DoMouseClick(1629, 912);
+                    Thread.Sleep(1000);
+                }
+                if (checkBox2.Checked == true)
+                {
+                    if (SecScreenIsPos)
+                    {
+                        DoMouseClick(2257, 405);
+                        Thread.Sleep(1000);
+                        DoMouseClick(2861, 828);
+                        Thread.Sleep(2000);
+                        DoMouseClick(3549, 912);
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        DoMouseClick(-1583, 405);
+                        Thread.Sleep(1000);
+                        DoMouseClick(-979, 828);
+                        Thread.Sleep(2000);
+                        DoMouseClick(-291, 912);
+                        Thread.Sleep(1000);
+                    }
+                }
+            }
+        }
+
+        private int CheckExerciseWinOrLose()
+        {
+            if (xMax != 1920 && yMax != 1080)
+            {
+                int[] PixelToTest_X = new int[2];
+                PixelToTest_X[0] = 988;
+                PixelToTest_X[1] = 1198;
+                int[] PixelToTest_Y = new int[2];
+                PixelToTest_Y[0] = 386;
+                PixelToTest_Y[1] = 557;
+
+                PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
+                PixelToTest_X[1] = PixelToTest_X[1] * xMax / 1920;
+                PixelToTest_Y[0] = PixelToTest_Y[0] * yMax / 1080;
+                PixelToTest_Y[1] = PixelToTest_Y[1] * yMax / 1080;
+
+                Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
+                PixelColor_[0] = new Color[4];
+                PixelColor_[1] = new Color[4];
+
+
+                for (int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        int tmpPixel_X = PixelToTest_X[i], tmpPixel_Y = PixelToTest_Y[i];
+
+                        if (j == 1 || j == 3)
+                        {
+                            tmpPixel_X += 1;
+                        }
+                        if (j == 2 || j == 3)
+                        {
+                            tmpPixel_Y += 1;
+                        }
+
+                        if (checkBox3.Checked == true)
+                        {
+                            PixelColor_[i][j] = GetPixelColor(tmpPixel_X, tmpPixel_Y);
+                        }
+                        else
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + xMax, tmpPixel_Y);
+                            }
+                            else
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - xMax, tmpPixel_Y);
+                            }
+                        }
+
+                        if (/*victoire*/PixelColor_[i][j].R == 225 && PixelColor_[i][j].G == 208 && PixelColor_[i][j].B == 107)
+                        {
+                            return 1;
+                        }
+                        else if (/*défaite*/ PixelColor_[i][j].R == 226 && PixelColor_[i][j].G == 106 && PixelColor_[i][j].B == 108)
+                        {
+                            return 2;
+                        }
+                    }
+                    return 0;
+                }
+            }
+
+            Color PixelColor;
+            Color PixelColor2;
+            
+
+            if (checkBox3.Checked == true)
+            {
+                PixelColor = GetPixelColor(988, 386);
+                PixelColor2 = GetPixelColor(1198, 557);
+            }
+            else
+            {
+                if (SecScreenIsPos)
+                {
+                    PixelColor = GetPixelColor(2908, 386);
+                    PixelColor2 = GetPixelColor(3118, 557);
+                }
+                else
+                {
+                    PixelColor = GetPixelColor(-932, 386);
+                    PixelColor2 = GetPixelColor(-722, 557);
+                }
+            }
+
+            if (/*victoire*/PixelColor.R == 225 && PixelColor.G == 208 && PixelColor.B == 107)
+            {
+                return 1;
+            }
+            else if (/*défaite*/ PixelColor2.R == 226 && PixelColor2.G == 106 && PixelColor2.B == 108)
+            {
+                return 2;
+            }
+            return 0;
+        }
+
+        private void FinishExerciseAttack()
+        {
+            ExerciseWinLoseTest = CheckExerciseWinOrLose();
+            if (ExerciseWinLoseTest == 1)//si win
+            {
+                if (checkBox3.Checked == true)
+                {
+                    DoMouseClick(1558, 962);
+                    Thread.Sleep(1000);
+                    DoMouseClick(1558, 962);
+                    Thread.Sleep(2000);
+                    DoMouseClick(1558, 962);
+                    Thread.Sleep(2000);
+                }
+                if (checkBox2.Checked == true)
+                {
+                    if (SecScreenIsPos)
+                    {
+                        DoMouseClick(3478, 962);
+                        Thread.Sleep(1000);
+                        DoMouseClick(3478, 962);
+                        Thread.Sleep(2000);
+                        DoMouseClick(3478, 962);
+                        Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        DoMouseClick(-362, 962);
+                        Thread.Sleep(1000);
+                        DoMouseClick(-362, 962);
+                        Thread.Sleep(2000);
+                        DoMouseClick(-362, 962);
+                        Thread.Sleep(2000);
+                    }
+                }
+                ExerciseWinLoseTest = 0;
+                goalCounterExercise++;
+            }
+            else if (ExerciseWinLoseTest == 2)//si lost
+            {
+                if (checkBox3.Checked == true)
+                {
+                    DoMouseClick(1558, 962);
+                    Thread.Sleep(1000);
+                    DoMouseClick(1558, 962);
+                    Thread.Sleep(2000);
+                    DoMouseClick(1558, 962);
+                    Thread.Sleep(2000);
+                    DoMouseClick(926, 887);
+                    Thread.Sleep(2000);
+                }
+                if (checkBox2.Checked == true)
+                {
+                    if (SecScreenIsPos)
+                    {
+                        DoMouseClick(3478, 962);
+                        Thread.Sleep(1000);
+                        DoMouseClick(3478, 962);
+                        Thread.Sleep(2000);
+                        DoMouseClick(3478, 962);
+                        Thread.Sleep(2000);
+                        DoMouseClick(2846, 887);
+                        Thread.Sleep(2000);
+                    }
+                    else
+                    {
+                        DoMouseClick(-362, 962);
+                        Thread.Sleep(1000);
+                        DoMouseClick(-362, 962);
+                        Thread.Sleep(2000);
+                        DoMouseClick(-362, 962);
+                        Thread.Sleep(2000);
+                        DoMouseClick(-994, 887);
+                        Thread.Sleep(2000);
+                    }
+                }
+                ExerciseWinLoseTest = 0;
+                goalCounterExercise++;
+            }
+        }
+
 
 
         private void myTimer_Tick(object sender, EventArgs e)
@@ -650,7 +1040,6 @@ namespace AL_Bot
 
                     RelaunchMap();
 
-                    goalCounter++;
                     if (goalCounter >= goalNb)
                     {
                         myTimer.Enabled = false;
@@ -669,6 +1058,24 @@ namespace AL_Bot
                     }
 
                     RelaunchMap();
+                }
+            }
+
+            if(ExerciseAsked == true)
+            {
+                LaunchExerciseAttack();
+                FinishExerciseAttack();
+
+                if (goalCounterExercise >= goalNbExercise)
+                {
+                    myTimer.Enabled = false;
+                    button1.Enabled = true;
+                    goalCounterExercise = -1;
+                    ExerciseAsked = false;
+                    button8.Enabled = true;
+                    checkBox7.Checked = false;
+                    button11.Enabled = true;
+                    button10.Enabled = true;
                 }
             }
         }
