@@ -321,7 +321,6 @@ namespace AL_Bot
                         }
                     }
 
-                    //(/*Avec meta*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 222 || /*Avec meta n°2*/PixelColor[i].R == 176 && PixelColor[i].G == 196 && PixelColor[i].B == 229 || /*Sans meta*/ PixelColor[i].R == 90 && PixelColor[i].G == 142 && PixelColor[i].B == 214)
                     if (/*Avec meta*/PixelColor[i].R >= 166 && PixelColor[i].G >= 186 && PixelColor[i].B >= 212 && PixelColor[i].R <= 186 && PixelColor[i].G <= 206 && PixelColor[i].B <= 232 || /*Avec meta n°2*/PixelColor[i].R >= 166 && PixelColor[i].G >= 186 && PixelColor[i].B >= 219 && PixelColor[i].R <= 186 && PixelColor[i].G <= 206 && PixelColor[i].B <= 239 || /*Sans meta*/ PixelColor[i].R >= 80 && PixelColor[i].G >= 132 && PixelColor[i].B >= 204 && PixelColor[i].R <= 100 && PixelColor[i].G <= 152 && PixelColor[i].B <= 224)
                     {
                         return true;
@@ -555,11 +554,11 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*Sans meta*/PixelColor_[i][j].R == 183 && PixelColor_[i][j].G == 160 && PixelColor_[i][j].B == 222)
+                        if (/*Sans meta*/PixelColor_[i][j].R >= 173 && PixelColor_[i][j].G >= 150 && PixelColor_[i][j].B >= 212 && PixelColor_[i][j].R <= 193 && PixelColor_[i][j].G <= 170 && PixelColor_[i][j].B <= 232)
                         {
                             return 1;
                         }
-                        else if (/*Avec meta*/ PixelColor_[i][j].R == 107 && PixelColor_[i][j].G == 101 && PixelColor_[i][j].B == 173)
+                        else if (/*Avec meta*/PixelColor_[i][j].R >= 97 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].B >= 163 && PixelColor_[i][j].R <= 117 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B <= 183)
                         {
                             return 2;
                         }
@@ -653,7 +652,7 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*Avec meta*/PixelColor_[i][j].R == 176 && PixelColor_[i][j].G == 196 && PixelColor_[i][j].B == 222 || /*Avec meta n°2*/PixelColor_[i][j].R == 176 && PixelColor_[i][j].G == 196 && PixelColor_[i][j].B == 229 || /*Sans meta*/ PixelColor_[i][j].R == 90 && PixelColor_[i][j].G == 142 && PixelColor_[i][j].B == 214)
+                        if (/*croix rouge*/PixelColor_[i][j].R >= 177 && PixelColor_[i][j].G >= 142 && PixelColor_[i][j].B >= 153 && PixelColor_[i][j].R <= 191 && PixelColor_[i][j].G <= 154 && PixelColor_[i][j].B <= 163 || PixelColor_[i][j].R >= 47 && PixelColor_[i][j].G >= 90 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G <= 110 && PixelColor_[i][j].B <= 166)
                         {
                             return true;
                         }
@@ -745,7 +744,7 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*premier joueur*/PixelColor_[i][j].R == 193 && PixelColor_[i][j].G == 197 || PixelColor_[i][j].B == 200 || /*deuxieme joueur*/PixelColor_[i][j].R == 198 && PixelColor_[i][j].G == 203 && PixelColor_[i][j].B == 206)
+                        if (/*premier joueur*/PixelColor_[i][j].R >= 183 && PixelColor_[i][j].G >= 187 && PixelColor_[i][j].B >= 190 && PixelColor_[i][j].R <= 203 && PixelColor_[i][j].G <= 207 && PixelColor_[i][j].B <= 210  || /*quatrième joueur*/PixelColor_[i][j].R >= 188 && PixelColor_[i][j].G >= 193 && PixelColor_[i][j].B >= 196 && PixelColor_[i][j].R <= 208 && PixelColor_[i][j].G <= 213 && PixelColor_[i][j].B <= 216)
                         {
                             count++;
                         }
@@ -878,11 +877,11 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*victoire*/PixelColor_[i][j].R == 225 && PixelColor_[i][j].G == 208 && PixelColor_[i][j].B == 107)
+                        if (/*victoire*/PixelColor_[i][j].R >= 215 && PixelColor_[i][j].G >= 198 && PixelColor_[i][j].B >= 97 && PixelColor_[i][j].R <= 235 && PixelColor_[i][j].G <= 218 && PixelColor_[i][j].B <= 117)
                         {
                             return 1;
                         }
-                        else if (/*défaite*/ PixelColor_[i][j].R == 226 && PixelColor_[i][j].G == 106 && PixelColor_[i][j].B == 108)
+                        else if (/*défaite*/ PixelColor_[i][j].R >= 216 && PixelColor_[i][j].G >= 96 && PixelColor_[i][j].B >= 98 && PixelColor_[i][j].R <= 236 && PixelColor_[i][j].G <= 116 && PixelColor_[i][j].B <= 118)
                         {
                             return 2;
                         }
