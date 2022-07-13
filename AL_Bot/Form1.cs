@@ -365,12 +365,12 @@ namespace AL_Bot
             {
                 if (SecScreenIsPos)
                 {
-                    DoMouseClick(3220, 900);
+                    DoMouseClick(1300 + xMax, 900);
                     Thread.Sleep(1000);
                 }
                 else
                 {
-                    DoMouseClick(-620, 900);
+                    DoMouseClick(1300 - xMax, 900);
                     Thread.Sleep(1000);
                 }
             }
@@ -394,12 +394,12 @@ namespace AL_Bot
                 {
                     if (SecScreenIsPos)
                     {
-                        DoMouseClick(3009, 899);
+                        DoMouseClick(1089 + xMax, 899);
                         Thread.Sleep(1000);
                     }
                     else
                     {
-                        DoMouseClick(-831, 899);
+                        DoMouseClick(1089 - xMax, 899);
                         Thread.Sleep(1000);
                     }
                 }
@@ -416,12 +416,12 @@ namespace AL_Bot
                 {
                     if (SecScreenIsPos)
                     {
-                        DoMouseClick(3108, 906);
+                        DoMouseClick(1188 + xMax, 906);
                         Thread.Sleep(1000);
                     }
                     else
                     {
-                        DoMouseClick(-732, 906);
+                        DoMouseClick(1188 - xMax, 906);
                         Thread.Sleep(1000);
                     }
                 }
@@ -457,47 +457,47 @@ namespace AL_Bot
             {
                 if (SecScreenIsPos)
                 {
-                    DoMouseClick(2650, 750);
+                    DoMouseClick(730 + xMax, 750);
                     Thread.Sleep(4000);
-                    DoMouseClick(2970, 970);
+                    DoMouseClick(1050 + xMax, 970);
                     Thread.Sleep(1500);
-                    DoMouseClick(3370, 930);
+                    DoMouseClick(1450 + xMax, 930);
                     Thread.Sleep(1500);
-                    DoMouseClick(3070, 720);
+                    DoMouseClick(1150 + xMax, 720);
                     Thread.Sleep(1500);
-                    DoMouseClick(3070, 720);
+                    DoMouseClick(1150 + xMax, 720);
                     Thread.Sleep(1500);
-                    DoMouseClick(3290, 790);
+                    DoMouseClick(1370 + xMax, 790);
                     Thread.Sleep(1500);
-                    DoMouseClick(3090, 830);
+                    DoMouseClick(1170 + xMax, 830);
                     Thread.Sleep(1500);
-                    DoMouseClick(3090, 830);
+                    DoMouseClick(1170 + xMax, 830);
                     Thread.Sleep(1500);
-                    DoMouseClick(3260, 960);
+                    DoMouseClick(1340 + xMax, 960);
                     Thread.Sleep(4000);
-                    DoMouseClick(3670, 800);
+                    DoMouseClick(1750 + xMax, 800);
                 }
                 else
                 {
-                    DoMouseClick(-1190, 750);
+                    DoMouseClick(730 - xMax, 750);
                     Thread.Sleep(4000);
-                    DoMouseClick(-870, 970);
+                    DoMouseClick(1050 - xMax, 970);
                     Thread.Sleep(1500);
-                    DoMouseClick(-470, 930);
+                    DoMouseClick(1450 - xMax, 930);
                     Thread.Sleep(1500);
-                    DoMouseClick(-770, 720);
+                    DoMouseClick(1150 - xMax, 720);
                     Thread.Sleep(1500);
-                    DoMouseClick(-770, 720);
+                    DoMouseClick(1150 - xMax, 720);
                     Thread.Sleep(1500);
-                    DoMouseClick(-550, 790);
+                    DoMouseClick(1370 - xMax, 790);
                     Thread.Sleep(1500);
-                    DoMouseClick(-750, 830);
+                    DoMouseClick(1170 - xMax, 830);
                     Thread.Sleep(1500);
-                    DoMouseClick(-750, 830);
+                    DoMouseClick(1170 - xMax, 830);
                     Thread.Sleep(1500);
-                    DoMouseClick(-580, 960);
+                    DoMouseClick(1340 - xMax, 960);
                     Thread.Sleep(4000);
-                    DoMouseClick(-170, 800);
+                    DoMouseClick(1750 - xMax, 800);
                 }
             }
         }
@@ -652,7 +652,7 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*croix rouge*/PixelColor_[i][j].R >= 177 && PixelColor_[i][j].G >= 142 && PixelColor_[i][j].B >= 153 && PixelColor_[i][j].R <= 191 && PixelColor_[i][j].G <= 154 && PixelColor_[i][j].B <= 163 || PixelColor_[i][j].R >= 47 && PixelColor_[i][j].G >= 90 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G <= 110 && PixelColor_[i][j].B <= 166)
+                        if (/*croix rouge*/PixelColor_[i][j].R >= 172 && PixelColor_[i][j].G >= 137 && PixelColor_[i][j].B >= 148 && PixelColor_[i][j].R <= 196 && PixelColor_[i][j].G <= 159 && PixelColor_[i][j].B <= 168 || PixelColor_[i][j].R >= 47 && PixelColor_[i][j].G >= 90 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G <= 110 && PixelColor_[i][j].B <= 166)
                         {
                             return true;
                         }
@@ -805,20 +805,20 @@ namespace AL_Bot
                 {
                     if (SecScreenIsPos)
                     {
-                        DoMouseClick(2257, 405);
+                        DoMouseClick(337 + xMax, 405);
                         Thread.Sleep(1000);
-                        DoMouseClick(2861, 828);
+                        DoMouseClick(941 + xMax, 828);
                         Thread.Sleep(2000);
-                        DoMouseClick(3549, 912);
+                        DoMouseClick(1629 + xMax, 912);
                         Thread.Sleep(1000);
                     }
                     else
                     {
-                        DoMouseClick(-1583, 405);
+                        DoMouseClick(337 - xMax, 405);
                         Thread.Sleep(1000);
-                        DoMouseClick(-979, 828);
+                        DoMouseClick(941 - xMax, 828);
                         Thread.Sleep(2000);
-                        DoMouseClick(-291, 912);
+                        DoMouseClick(1629 - xMax, 912);
                         Thread.Sleep(1000);
                     }
                 }
@@ -942,20 +942,20 @@ namespace AL_Bot
                 {
                     if (SecScreenIsPos)
                     {
-                        DoMouseClick(3478, 962);
+                        DoMouseClick(1558 + xMax, 962);
                         Thread.Sleep(1000);
-                        DoMouseClick(3478, 962);
+                        DoMouseClick(1558 + xMax, 962);
                         Thread.Sleep(2000);
-                        DoMouseClick(3478, 962);
+                        DoMouseClick(1558 + xMax, 962);
                         Thread.Sleep(2000);
                     }
                     else
                     {
-                        DoMouseClick(-362, 962);
+                        DoMouseClick(1558 - xMax, 962);
                         Thread.Sleep(1000);
-                        DoMouseClick(-362, 962);
+                        DoMouseClick(1558 - xMax, 962);
                         Thread.Sleep(2000);
-                        DoMouseClick(-362, 962);
+                        DoMouseClick(1558 - xMax, 962);
                         Thread.Sleep(2000);
                     }
                 }
@@ -979,24 +979,24 @@ namespace AL_Bot
                 {
                     if (SecScreenIsPos)
                     {
-                        DoMouseClick(3478, 962);
+                        DoMouseClick(1558 + xMax, 962);
                         Thread.Sleep(1000);
-                        DoMouseClick(3478, 962);
+                        DoMouseClick(1558 + xMax, 962);
                         Thread.Sleep(2000);
-                        DoMouseClick(3478, 962);
+                        DoMouseClick(1558 + xMax, 962);
                         Thread.Sleep(2000);
-                        DoMouseClick(2846, 887);
+                        DoMouseClick(926 + xMax, 887);
                         Thread.Sleep(2000);
                     }
                     else
                     {
-                        DoMouseClick(-362, 962);
+                        DoMouseClick(1558 - xMax, 962);
                         Thread.Sleep(1000);
-                        DoMouseClick(-362, 962);
+                        DoMouseClick(1558 - xMax, 962);
                         Thread.Sleep(2000);
-                        DoMouseClick(-362, 962);
+                        DoMouseClick(1558 - xMax, 962);
                         Thread.Sleep(2000);
-                        DoMouseClick(-994, 887);
+                        DoMouseClick(926 - xMax, 887);
                         Thread.Sleep(2000);
                     }
                 }
