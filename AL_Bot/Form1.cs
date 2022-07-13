@@ -253,6 +253,18 @@ namespace AL_Bot
             {
                 X = X * xMax / 1920;
                 Y = Y * yMax / 1080;
+
+                if (checkBox2.Checked == true)
+                {
+                    if (SecScreenIsPos)
+                    {
+                        X += xMax;
+                    }
+                    else
+                    {
+                        X -= xMax;
+                    }
+                }
             }
             
             Rectangle BoundRect = new Rectangle(X, Y, 1, 1);
@@ -356,25 +368,10 @@ namespace AL_Bot
 
         private void RelaunchMap()
         {
-            if (checkBox3.Checked == true)
-            {
-                DoMouseClick(1300, 900);
-                Thread.Sleep(1000);
-            }
-            if (checkBox2.Checked == true)
-            {
-                if (SecScreenIsPos)
-                {
-                    DoMouseClick(1300 + xMax, 900);
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    DoMouseClick(1300 - xMax, 900);
-                    Thread.Sleep(1000);
-                }
-            }
-            if(button8.Enabled == false)
+            DoMouseClick(1300, 900);
+            Thread.Sleep(1000);
+
+            if (button8.Enabled == false)
             {
                 goalCounter++;
             }
@@ -385,54 +382,22 @@ namespace AL_Bot
             DoubleMapItemTest = CheckDoubleItem();
             if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
             {
-                if (checkBox3.Checked == true)
-                {
-                    DoMouseClick(1089, 899);
-                    Thread.Sleep(1000);
-                }
-                if (checkBox2.Checked == true)
-                {
-                    if (SecScreenIsPos)
-                    {
-                        DoMouseClick(1089 + xMax, 899);
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        DoMouseClick(1089 - xMax, 899);
-                        Thread.Sleep(1000);
-                    }
-                }
+                DoMouseClick(1089, 899);
+                Thread.Sleep(1000);
+                
                 DoubleMapItemTest = 0;
             }
             else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
             {
-                if (checkBox3.Checked == true)
-                {
-                    DoMouseClick(1188, 906);
-                    Thread.Sleep(1000);
-                }
-                if (checkBox2.Checked == true)
-                {
-                    if (SecScreenIsPos)
-                    {
-                        DoMouseClick(1188 + xMax, 906);
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        DoMouseClick(1188 - xMax, 906);
-                        Thread.Sleep(1000);
-                    }
-                }
+                DoMouseClick(1188, 906);
+                Thread.Sleep(1000);
+                
                 DoubleMapItemTest = 0;
             }
         }
 
         private void SortDock()
         {
-            if (checkBox3.Checked == true)
-            {
                 DoMouseClick(730, 750);
                 Thread.Sleep(4000);
                 DoMouseClick(1050, 970);
@@ -452,54 +417,6 @@ namespace AL_Bot
                 DoMouseClick(1340, 960);
                 Thread.Sleep(4000);
                 DoMouseClick(1750, 800);
-            }
-            if (checkBox2.Checked == true)
-            {
-                if (SecScreenIsPos)
-                {
-                    DoMouseClick(730 + xMax, 750);
-                    Thread.Sleep(4000);
-                    DoMouseClick(1050 + xMax, 970);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1450 + xMax, 930);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1150 + xMax, 720);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1150 + xMax, 720);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1370 + xMax, 790);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1170 + xMax, 830);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1170 + xMax, 830);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1340 + xMax, 960);
-                    Thread.Sleep(4000);
-                    DoMouseClick(1750 + xMax, 800);
-                }
-                else
-                {
-                    DoMouseClick(730 - xMax, 750);
-                    Thread.Sleep(4000);
-                    DoMouseClick(1050 - xMax, 970);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1450 - xMax, 930);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1150 - xMax, 720);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1150 - xMax, 720);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1370 - xMax, 790);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1170 - xMax, 830);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1170 - xMax, 830);
-                    Thread.Sleep(1500);
-                    DoMouseClick(1340 - xMax, 960);
-                    Thread.Sleep(4000);
-                    DoMouseClick(1750 - xMax, 800);
-                }
-            }
         }
 
         private int CheckDoubleItem()
@@ -792,36 +709,12 @@ namespace AL_Bot
             IsExercise = CheckIfExercise();
             if(IsExercise == true)
             {
-                if (checkBox3.Checked == true)
-                {
-                    DoMouseClick(337, 405);
-                    Thread.Sleep(1000);
-                    DoMouseClick(941, 828);
-                    Thread.Sleep(2000);
-                    DoMouseClick(1629, 912);
-                    Thread.Sleep(1000);
-                }
-                if (checkBox2.Checked == true)
-                {
-                    if (SecScreenIsPos)
-                    {
-                        DoMouseClick(337 + xMax, 405);
-                        Thread.Sleep(1000);
-                        DoMouseClick(941 + xMax, 828);
-                        Thread.Sleep(2000);
-                        DoMouseClick(1629 + xMax, 912);
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        DoMouseClick(337 - xMax, 405);
-                        Thread.Sleep(1000);
-                        DoMouseClick(941 - xMax, 828);
-                        Thread.Sleep(2000);
-                        DoMouseClick(1629 - xMax, 912);
-                        Thread.Sleep(1000);
-                    }
-                }
+                DoMouseClick(337, 405);
+                Thread.Sleep(1000);
+                DoMouseClick(941, 828);
+                Thread.Sleep(2000);
+                DoMouseClick(1629, 912);
+                Thread.Sleep(1000);
             }
         }
 
@@ -929,77 +822,27 @@ namespace AL_Bot
             ExerciseWinLoseTest = CheckExerciseWinOrLose();
             if (ExerciseWinLoseTest == 1)//si win
             {
-                if (checkBox3.Checked == true)
-                {
-                    DoMouseClick(1558, 962);
-                    Thread.Sleep(1000);
-                    DoMouseClick(1558, 962);
-                    Thread.Sleep(2000);
-                    DoMouseClick(1558, 962);
-                    Thread.Sleep(2000);
-                }
-                if (checkBox2.Checked == true)
-                {
-                    if (SecScreenIsPos)
-                    {
-                        DoMouseClick(1558 + xMax, 962);
-                        Thread.Sleep(1000);
-                        DoMouseClick(1558 + xMax, 962);
-                        Thread.Sleep(2000);
-                        DoMouseClick(1558 + xMax, 962);
-                        Thread.Sleep(2000);
-                    }
-                    else
-                    {
-                        DoMouseClick(1558 - xMax, 962);
-                        Thread.Sleep(1000);
-                        DoMouseClick(1558 - xMax, 962);
-                        Thread.Sleep(2000);
-                        DoMouseClick(1558 - xMax, 962);
-                        Thread.Sleep(2000);
-                    }
-                }
+                DoMouseClick(1558, 962);
+                Thread.Sleep(1000);
+                DoMouseClick(1558, 962);
+                Thread.Sleep(2000);
+                DoMouseClick(1558, 962);
+                Thread.Sleep(2000);
+                
                 ExerciseWinLoseTest = 0;
                 goalCounterExercise++;
             }
             else if (ExerciseWinLoseTest == 2)//si lost
             {
-                if (checkBox3.Checked == true)
-                {
-                    DoMouseClick(1558, 962);
-                    Thread.Sleep(1000);
-                    DoMouseClick(1558, 962);
-                    Thread.Sleep(2000);
-                    DoMouseClick(1558, 962);
-                    Thread.Sleep(2000);
-                    DoMouseClick(926, 887);
-                    Thread.Sleep(2000);
-                }
-                if (checkBox2.Checked == true)
-                {
-                    if (SecScreenIsPos)
-                    {
-                        DoMouseClick(1558 + xMax, 962);
-                        Thread.Sleep(1000);
-                        DoMouseClick(1558 + xMax, 962);
-                        Thread.Sleep(2000);
-                        DoMouseClick(1558 + xMax, 962);
-                        Thread.Sleep(2000);
-                        DoMouseClick(926 + xMax, 887);
-                        Thread.Sleep(2000);
-                    }
-                    else
-                    {
-                        DoMouseClick(1558 - xMax, 962);
-                        Thread.Sleep(1000);
-                        DoMouseClick(1558 - xMax, 962);
-                        Thread.Sleep(2000);
-                        DoMouseClick(1558 - xMax, 962);
-                        Thread.Sleep(2000);
-                        DoMouseClick(926 - xMax, 887);
-                        Thread.Sleep(2000);
-                    }
-                }
+                DoMouseClick(1558, 962);
+                Thread.Sleep(1000);
+                DoMouseClick(1558, 962);
+                Thread.Sleep(2000);
+                DoMouseClick(1558, 962);
+                Thread.Sleep(2000);
+                DoMouseClick(926, 887);
+                Thread.Sleep(2000);
+                
                 ExerciseWinLoseTest = 0;
                 goalCounterExercise++;
             }
