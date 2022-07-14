@@ -359,7 +359,7 @@ namespace AL_Bot
                 }
             }
 
-            if (/*Avec meta*/PixelColor_.R == 176 && PixelColor_.G == 196 && PixelColor_.B == 222 || /*Avec meta n°2*/PixelColor_.R == 176 && PixelColor_.G == 196 && PixelColor_.B == 229 || /*Sans meta*/ PixelColor_.R == 90 && PixelColor_.G == 142 && PixelColor_.B == 214)
+            if (/*Avec meta*/PixelColor_.R >= 166 && PixelColor_.G >= 186 && PixelColor_.B >= 212 && PixelColor_.R <= 186 && PixelColor_.G <= 206 && PixelColor_.B <= 232 || /*Avec meta n°2*/PixelColor_.R >= 166 && PixelColor_.G >= 186 && PixelColor_.B >= 219 && PixelColor_.R <= 186 && PixelColor_.G <= 206 && PixelColor_.B <= 239 || /*Sans meta*/ PixelColor_.R >= 80 && PixelColor_.G >= 132 && PixelColor_.B >= 204 && PixelColor_.R <= 100 && PixelColor_.G <= 152 && PixelColor_.B <= 224)
             {
                 return true;
             }
