@@ -480,8 +480,8 @@ namespace AL_Bot
                             return 2;
                         }
                     }
-                    return 0;
                 }
+                return 0;
             }
 
             Color PixelColor;
@@ -574,8 +574,8 @@ namespace AL_Bot
                             return true;
                         }
                     }
-                    return false;
                 }
+                return false;
             }
 
             Color PixelColor;
@@ -779,8 +779,8 @@ namespace AL_Bot
                             return 2;
                         }
                     }
-                    return 0;
                 }
+                return 0;
             }
 
             Color PixelColor;
