@@ -253,20 +253,20 @@ namespace AL_Bot
             {
                 X = X * xMax / 1920;
                 Y = Y * yMax / 1080;
+            }
 
-                if (checkBox2.Checked == true)
+            if (checkBox2.Checked == true)
+            {
+                if (SecScreenIsPos)
                 {
-                    if (SecScreenIsPos)
-                    {
-                        X += xMax;
-                    }
-                    else
-                    {
-                        X -= xMax;
-                    }
+                    X += xMax;
+                }
+                else
+                {
+                    X -= xMax;
                 }
             }
-            
+
             Rectangle BoundRect = new Rectangle(X, Y, 1, 1);
             Cursor.Clip = BoundRect;
 
