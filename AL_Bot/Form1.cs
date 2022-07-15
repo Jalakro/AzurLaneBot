@@ -615,7 +615,7 @@ namespace AL_Bot
                 }
             }
             
-            if (PixelColor.R >= 177 && PixelColor.R <= 191 && PixelColor.G >= 142 && PixelColor.G <= 154 && PixelColor.B >= 153 && PixelColor.B <= 163 || PixelColor2.R >= 52 && PixelColor2.R <= 62 && PixelColor2.G >= 96 && PixelColor2.G <= 106 && PixelColor2.B >= 151 && PixelColor2.B <= 161)
+            if (PixelColor.R >= 177 && PixelColor.R <= 191 && PixelColor.G >= 142 && PixelColor.G <= 154 && PixelColor.B >= 153 && PixelColor.B <= 163 || PixelColor2.R >= 54 && PixelColor2.R <= 60 && PixelColor2.G >= 98 && PixelColor2.G <= 104 && PixelColor2.B >= 153 && PixelColor2.B <= 159)
             {
                 return true;
             }
