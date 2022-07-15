@@ -600,7 +600,7 @@ namespace AL_Bot
                 }
             }
             
-            if (PixelColor.R >= 177 && PixelColor.R <= 191 && PixelColor.G >= 142 && PixelColor.G <= 154 && PixelColor.B >= 153 && PixelColor.B <= 163 || PixelColor2.R == 57 && PixelColor2.G == 100 && PixelColor2.B == 156)
+            if (PixelColor.R >= 177 && PixelColor.R <= 191 && PixelColor.G >= 142 && PixelColor.G <= 154 && PixelColor.B >= 153 && PixelColor.B <= 163 || PixelColor2.R >= 52 && PixelColor2.R <= 62 && PixelColor2.G >= 96 && PixelColor2.G <= 106 && PixelColor2.B >= 151 && PixelColor2.B <= 161)
             {
                 return true;
             }
@@ -724,10 +724,10 @@ namespace AL_Bot
             {
                 int[] PixelToTest_X = new int[2];
                 PixelToTest_X[0] = 988;
-                PixelToTest_X[1] = 1198;
+                PixelToTest_X[1] = 965;
                 int[] PixelToTest_Y = new int[2];
                 PixelToTest_Y[0] = 386;
-                PixelToTest_Y[1] = 557;
+                PixelToTest_Y[1] = 300;
 
                 PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
                 PixelToTest_X[1] = PixelToTest_X[1] * xMax / 1920;
@@ -774,7 +774,7 @@ namespace AL_Bot
                         {
                             return 1;
                         }
-                        else if (/*défaite*/ PixelColor_[i][j].R >= 216 && PixelColor_[i][j].G >= 96 && PixelColor_[i][j].B >= 98 && PixelColor_[i][j].R <= 236 && PixelColor_[i][j].G <= 116 && PixelColor_[i][j].B <= 118)
+                        else if (/*défaite*/ PixelColor_[i][j].R >= 168 && PixelColor_[i][j].G >= 173 && PixelColor_[i][j].B >= 168 && PixelColor_[i][j].R <= 188 && PixelColor_[i][j].G <= 193 && PixelColor_[i][j].B <= 188)
                         {
                             return 2;
                         }
@@ -790,27 +790,27 @@ namespace AL_Bot
             if (checkBox3.Checked == true)
             {
                 PixelColor = GetPixelColor(988, 386);
-                PixelColor2 = GetPixelColor(1198, 557);
+                PixelColor2 = GetPixelColor(965, 300);
             }
             else
             {
                 if (SecScreenIsPos)
                 {
                     PixelColor = GetPixelColor(2908, 386);
-                    PixelColor2 = GetPixelColor(3118, 557);
+                    PixelColor2 = GetPixelColor(965+1920, 300);
                 }
                 else
                 {
                     PixelColor = GetPixelColor(-932, 386);
-                    PixelColor2 = GetPixelColor(-722, 557);
+                    PixelColor2 = GetPixelColor(965-1920, 300);
                 }
             }
 
-            if (/*victoire*/PixelColor.R == 225 && PixelColor.G == 208 && PixelColor.B == 107)
+            if (/*victoire*/PixelColor.R >= 220 && PixelColor.G >= 203 && PixelColor.B >= 102 && PixelColor.R <= 230 && PixelColor.G <= 213 && PixelColor.B <= 112)
             {
                 return 1;
             }
-            else if (/*défaite*/ PixelColor2.R == 226 && PixelColor2.G == 106 && PixelColor2.B == 108)
+            else if (/*défaite*/ PixelColor.R >= 173 && PixelColor.G >= 178 && PixelColor.B >= 173 && PixelColor.R <= 183 && PixelColor.G <= 188 && PixelColor.B <= 183)
             {
                 return 2;
             }
