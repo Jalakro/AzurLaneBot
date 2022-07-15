@@ -15,6 +15,7 @@ namespace AL_Bot
         int goalCounter = -1, goalNb;
         int goalCounterExercise = -1, goalNbExercise;
         Screen[] screens;
+        int LowPerfModifier = 1;
 
         //données et fonction pour faire un click
         #region
@@ -90,7 +91,6 @@ namespace AL_Bot
 
 
         //Buttons Functions
-        #region
         private void button1_Click(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
@@ -240,7 +240,22 @@ namespace AL_Bot
                 checkBox5.Checked = true;
             }
         }
-        #endregion
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked == true)
+            {
+                LowPerfModifier = 1;
+                button12.Text = "Enable";
+                checkBox8.Checked = false;
+            }
+            else
+            {
+                LowPerfModifier = 2;
+                button12.Text = "Disable";
+                checkBox8.Checked = true;
+            }
+        }
 
 
 
@@ -270,10 +285,10 @@ namespace AL_Bot
             Rectangle BoundRect = new Rectangle(X, Y, 1, 1);
             Cursor.Clip = BoundRect;
 
-            Thread.Sleep(100);
+            Thread.Sleep(100 * LowPerfModifier);
             Cursor.Position = new Point(X, Y);
             mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)X, (uint)Y, 0, 0);
-            Thread.Sleep(100);
+            Thread.Sleep(100 * LowPerfModifier);
 
             Rectangle FullRect = new Rectangle(preXRect, preYRect, pre_width, pre_height);
             Cursor.Clip = FullRect;
@@ -369,7 +384,7 @@ namespace AL_Bot
         private void RelaunchMap()
         {
             DoMouseClick(1300, 900);
-            Thread.Sleep(1000);
+            Thread.Sleep(1000 * LowPerfModifier);
 
             if (button8.Enabled == false)
             {
@@ -383,14 +398,14 @@ namespace AL_Bot
             if (DoubleMapItemTest == 1)//si item double map voulu mais pas meta
             {
                 DoMouseClick(1089, 899);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 * LowPerfModifier);
                 
                 DoubleMapItemTest = 0;
             }
             else if (DoubleMapItemTest == 2)//si item double map voulu mais avec meta
             {
                 DoMouseClick(1188, 906);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 * LowPerfModifier);
                 
                 DoubleMapItemTest = 0;
             }
@@ -399,23 +414,23 @@ namespace AL_Bot
         private void SortDock()
         {
                 DoMouseClick(730, 750);
-                Thread.Sleep(4000);
+                Thread.Sleep(4000 * LowPerfModifier);
                 DoMouseClick(1050, 970);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1450, 930);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1150, 720);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1150, 720);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1370, 790);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1170, 830);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1170, 830);
-                Thread.Sleep(1500);
+                Thread.Sleep(1500 * LowPerfModifier);
                 DoMouseClick(1340, 960);
-                Thread.Sleep(4000);
+                Thread.Sleep(4000 * LowPerfModifier);
                 DoMouseClick(1750, 800);
         }
 
@@ -710,11 +725,11 @@ namespace AL_Bot
             if(IsExercise == true)
             {
                 DoMouseClick(337, 405);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 * LowPerfModifier);
                 DoMouseClick(941, 828);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000 * LowPerfModifier);
                 DoMouseClick(1629, 912);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 * LowPerfModifier);
             }
         }
 
@@ -823,11 +838,11 @@ namespace AL_Bot
             if (ExerciseWinLoseTest == 1)//si win
             {
                 DoMouseClick(1558, 962);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 * LowPerfModifier);
                 DoMouseClick(1558, 962);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000 * LowPerfModifier);
                 DoMouseClick(1558, 962);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000 * LowPerfModifier);
                 
                 ExerciseWinLoseTest = 0;
                 goalCounterExercise++;
@@ -835,13 +850,13 @@ namespace AL_Bot
             else if (ExerciseWinLoseTest == 2)//si lost
             {
                 DoMouseClick(1558, 962);
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 * LowPerfModifier);
                 DoMouseClick(1558, 962);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000 * LowPerfModifier);
                 DoMouseClick(1558, 962);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000 * LowPerfModifier);
                 DoMouseClick(926, 887);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000 * LowPerfModifier);
                 
                 ExerciseWinLoseTest = 0;
                 goalCounterExercise++;
