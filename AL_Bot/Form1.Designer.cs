@@ -272,6 +272,7 @@
             // 
             // checkBox8
             // 
+            this.checkBox8.AutoCheck = false;
             this.checkBox8.AutoSize = true;
             this.checkBox8.Location = new System.Drawing.Point(307, 415);
             this.checkBox8.Name = "checkBox8";

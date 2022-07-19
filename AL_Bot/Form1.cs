@@ -537,10 +537,10 @@ namespace AL_Bot
             if (xMax != 1920 && yMax != 1080)
             {
                 int[] PixelToTest_X = new int[2];
-                PixelToTest_X[0] = 1347;
+                PixelToTest_X[0] = 1280;
                 PixelToTest_X[1] = 562;
                 int[] PixelToTest_Y = new int[2];
-                PixelToTest_Y[0] = 338;
+                PixelToTest_Y[0] = 300;
                 PixelToTest_Y[1] = 712;
 
                 PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
@@ -551,9 +551,11 @@ namespace AL_Bot
                 Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
                 PixelColor_[0] = new Color[4];
                 PixelColor_[1] = new Color[4];
-                
 
-                for(int i = 0; i < 2; i++)
+                int count = 0; //need both pixels to be detected
+
+
+                for (int i = 0; i < 2; i++)
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -584,38 +586,44 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*croix rouge*/PixelColor_[i][j].R >= 172 && PixelColor_[i][j].G >= 137 && PixelColor_[i][j].B >= 148 && PixelColor_[i][j].R <= 196 && PixelColor_[i][j].G <= 159 && PixelColor_[i][j].B <= 168 || PixelColor_[i][j].R >= 47 && PixelColor_[i][j].G >= 90 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G <= 110 && PixelColor_[i][j].B <= 166)
+                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 213 && PixelColor_[i][j].G >= 78 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 76 && PixelColor_[i][j].B <= 96 && /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
                         {
-                            return true;
+                            count++;
                         }
                     }
                 }
+
+                if (count >= 2)
+                {
+                    return true;
+                }
                 return false;
             }
+
 
             Color PixelColor;
             Color PixelColor2;
 
             if (checkBox3.Checked == true)
             {
-                PixelColor = GetPixelColor(1347, 338);
+                PixelColor = GetPixelColor(1280, 300);
                 PixelColor2 = GetPixelColor(562, 712);
             }
             else
             {
                 if (SecScreenIsPos)
                 {
-                    PixelColor = GetPixelColor(3267, 338);
+                    PixelColor = GetPixelColor(1280+1920, 300);
                     PixelColor2 = GetPixelColor(2482, 712);
                 }
                 else
                 {
-                    PixelColor = GetPixelColor(-573, 338);
+                    PixelColor = GetPixelColor(1280-1920, 300);
                     PixelColor2 = GetPixelColor(-1358, 712);
                 }
             }
             
-            if (PixelColor.R >= 177 && PixelColor.R <= 191 && PixelColor.G >= 142 && PixelColor.G <= 154 && PixelColor.B >= 153 && PixelColor.B <= 163 || PixelColor2.R >= 54 && PixelColor2.R <= 60 && PixelColor2.G >= 98 && PixelColor2.G <= 104 && PixelColor2.B >= 153 && PixelColor2.B <= 159)
+            if (/*croix rouge*/PixelColor.R >= 197 && PixelColor.R <= 209 && PixelColor.G >= 78 && PixelColor.G <= 98 && PixelColor.B >= 76 && PixelColor.B <= 96 && /*pixel dans bouton sort*/ PixelColor2.R >= 54 && PixelColor2.R <= 60 && PixelColor2.G >= 98 && PixelColor2.G <= 104 && PixelColor2.B >= 153 && PixelColor2.B <= 159)
             {
                 return true;
             }
@@ -825,7 +833,7 @@ namespace AL_Bot
             {
                 return 1;
             }
-            else if (/*défaite*/ PixelColor.R >= 173 && PixelColor.G >= 178 && PixelColor.B >= 173 && PixelColor.R <= 183 && PixelColor.G <= 188 && PixelColor.B <= 183)
+            else if (/*défaite*/ PixelColor2.R >= 173 && PixelColor2.G >= 178 && PixelColor2.B >= 173 && PixelColor2.R <= 183 && PixelColor2.G <= 188 && PixelColor2.B <= 183)
             {
                 return 2;
             }
