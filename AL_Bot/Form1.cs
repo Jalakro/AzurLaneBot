@@ -586,7 +586,7 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 213 && PixelColor_[i][j].G >= 78 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 76 && PixelColor_[i][j].B <= 96 && /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
+                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 213 && PixelColor_[i][j].G >= 73 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 71 && PixelColor_[i][j].B <= 96 && /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
                         {
                             count++;
                         }
@@ -623,7 +623,7 @@ namespace AL_Bot
                 }
             }
             
-            if (/*croix rouge*/PixelColor.R >= 197 && PixelColor.R <= 209 && PixelColor.G >= 78 && PixelColor.G <= 98 && PixelColor.B >= 76 && PixelColor.B <= 96 && /*pixel dans bouton sort*/ PixelColor2.R >= 54 && PixelColor2.R <= 60 && PixelColor2.G >= 98 && PixelColor2.G <= 104 && PixelColor2.B >= 153 && PixelColor2.B <= 159)
+            if (/*croix rouge*/PixelColor.R >= 197 && PixelColor.R <= 209 && PixelColor.G >= 73 && PixelColor.G <= 98 && PixelColor.B >= 71 && PixelColor.B <= 96 && /*pixel dans bouton sort*/ PixelColor2.R >= 52 && PixelColor2.R <= 62 && PixelColor2.G >= 96 && PixelColor2.G <= 106 && PixelColor2.B >= 151 && PixelColor2.B <= 161)
             {
                 return true;
             }
