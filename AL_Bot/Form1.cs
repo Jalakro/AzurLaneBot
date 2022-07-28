@@ -183,7 +183,7 @@ namespace AL_Bot
             }
             else
             {
-                MessageBox.Show("Texte entrée non valide");
+                MessageBox.Show("Non valid text input, try again");
             }
         }
 
@@ -413,25 +413,29 @@ namespace AL_Bot
 
         private void SortDock()
         {
-                DoMouseClick(730, 750);
-                Thread.Sleep(4000 * LowPerfModifier);
-                DoMouseClick(1050, 970);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1450, 930);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1150, 720);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1150, 720);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1370, 790);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1170, 830);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1170, 830);
-                Thread.Sleep(1500 * LowPerfModifier);
-                DoMouseClick(1340, 960);
-                Thread.Sleep(4000 * LowPerfModifier);
-                DoMouseClick(1750, 800);
+            DoMouseClick(730, 750);
+            Thread.Sleep(4000 * LowPerfModifier);
+            DoMouseClick(1050, 970);
+            Thread.Sleep(1500 * LowPerfModifier);
+
+            //check quick retire a bien cliqué
+            QRCheckRecurs();
+
+            DoMouseClick(1450, 930);
+            Thread.Sleep(1500 * LowPerfModifier);
+            DoMouseClick(1150, 720);
+            Thread.Sleep(1500 * LowPerfModifier);
+            DoMouseClick(1150, 720);
+            Thread.Sleep(1500 * LowPerfModifier);
+            DoMouseClick(1370, 790);
+            Thread.Sleep(1500 * LowPerfModifier);
+            DoMouseClick(1170, 830);
+            Thread.Sleep(1500 * LowPerfModifier);
+            DoMouseClick(1170, 830);
+            Thread.Sleep(1500 * LowPerfModifier);
+            DoMouseClick(1340, 960);
+            Thread.Sleep(4000 * LowPerfModifier);
+            DoMouseClick(1750, 800);
         }
 
         private int CheckDoubleItem()
@@ -586,7 +590,7 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 213 && PixelColor_[i][j].G >= 73 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 71 && PixelColor_[i][j].B <= 96 && /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
+                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 213 && PixelColor_[i][j].G >= 73 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 71 && PixelColor_[i][j].B <= 96 || /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
                         {
                             count++;
                         }
@@ -628,6 +632,120 @@ namespace AL_Bot
                 return true;
             }
             return false;
+        }
+
+        private bool CheckQuickRetireClicked()
+        {
+            if (xMax != 1920 && yMax != 1080)
+            {
+                int[] PixelToTest_X = new int[2];
+                PixelToTest_X[0] = 1072;
+                PixelToTest_X[1] = 1563;
+                int[] PixelToTest_Y = new int[2];
+                PixelToTest_Y[0] = 921;
+                PixelToTest_Y[1] = 914;
+
+                PixelToTest_X[0] = PixelToTest_X[0] * xMax / 1920;
+                PixelToTest_X[1] = PixelToTest_X[1] * xMax / 1920;
+                PixelToTest_Y[0] = PixelToTest_Y[0] * yMax / 1080;
+                PixelToTest_Y[1] = PixelToTest_Y[1] * yMax / 1080;
+
+                Color[][] PixelColor_ = new Color[2][]; // dans cet ordre : x, x+1, y, y+1
+                PixelColor_[0] = new Color[4];
+                PixelColor_[1] = new Color[4];
+
+                int count = 0; //need both pixels to be detected
+
+
+                for (int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        int tmpPixel_X = PixelToTest_X[i], tmpPixel_Y = PixelToTest_Y[i];
+
+                        if (j == 1 || j == 3)
+                        {
+                            tmpPixel_X += 1;
+                        }
+                        if (j == 2 || j == 3)
+                        {
+                            tmpPixel_Y += 1;
+                        }
+
+                        if (checkBox3.Checked == true)
+                        {
+                            PixelColor_[i][j] = GetPixelColor(tmpPixel_X, tmpPixel_Y);
+                        }
+                        else
+                        {
+                            if (SecScreenIsPos)
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X + xMax, tmpPixel_Y);
+                            }
+                            else
+                            {
+                                PixelColor_[i][j] = GetPixelColor(tmpPixel_X - xMax, tmpPixel_Y);
+                            }
+                        }
+
+                        if (/*cancel*/PixelColor_[i][j].R >= 146 && PixelColor_[i][j].R <= 166 && PixelColor_[i][j].G >= 71 && PixelColor_[i][j].G <= 91 && PixelColor_[i][j].B >= 58 && PixelColor_[i][j].B <= 78 || /*pixel dans bouton sort*/PixelColor_[i][j].R >= 72 && PixelColor_[i][j].R <= 92 && PixelColor_[i][j].G >= 124 && PixelColor_[i][j].G <= 144 && PixelColor_[i][j].B >= 188 && PixelColor_[i][j].B <= 208)
+                        {
+                            count++;
+                        }
+                    }
+                }
+
+                if (count >= 2)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+
+            Color PixelColor;
+            Color PixelColor2;
+
+            if (checkBox3.Checked == true)
+            {
+                PixelColor = GetPixelColor(1072, 921);
+                PixelColor2 = GetPixelColor(1563, 914);
+            }
+            else
+            {
+                if (SecScreenIsPos)
+                {
+                    PixelColor = GetPixelColor(1072 + 1920, 921);
+                    PixelColor2 = GetPixelColor(1563 + 1920, 914);
+                }
+                else
+                {
+                    PixelColor = GetPixelColor(1072 - 1920, 921);
+                    PixelColor2 = GetPixelColor(1563 - 1920, 914);
+                }
+            }
+            
+            if (/*cancel*/PixelColor.R >= 148 && PixelColor.R <= 164 && PixelColor.G >= 73 && PixelColor.G <= 89 && PixelColor.B >= 60 && PixelColor.B <= 76 && /*continue*/ PixelColor2.R >= 74 && PixelColor2.R <= 90 && PixelColor2.G >= 126 && PixelColor2.G <= 140 && PixelColor2.B >= 190 && PixelColor2.B <= 206)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void QRCheckRecurs()
+        {
+            bool test;
+            test = CheckQuickRetireClicked();
+            if (test)
+            {
+                return;
+            }
+            if (!test)
+            {
+                DoMouseClick(1050, 970);
+                Thread.Sleep(1500 * LowPerfModifier);
+                QRCheckRecurs();
+            }
         }
 
         private bool CheckIfExercise()
