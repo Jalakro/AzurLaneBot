@@ -14,7 +14,10 @@ namespace AL_Bot
         bool SecScreenIsPos = false;
         int goalCounter = -1, goalNb;
         int goalCounterExercise = -1, goalNbExercise;
+        int RecursCounter = 0;
+
         Screen[] screens;
+
         int LowPerfModifier = 1;
 
         //données et fonction pour faire un click
@@ -419,6 +422,7 @@ namespace AL_Bot
             Thread.Sleep(1500 * LowPerfModifier);
 
             //check quick retire a bien cliqué
+            if(RecursCounter > 0)
             QRCheckRecurs();
 
             DoMouseClick(1450, 930);
@@ -738,12 +742,14 @@ namespace AL_Bot
             test = CheckQuickRetireClicked();
             if (test)
             {
+                RecursCounter = 3;
                 return;
             }
             if (!test)
             {
                 DoMouseClick(1050, 970);
                 Thread.Sleep(1500 * LowPerfModifier);
+                RecursCounter--;
                 QRCheckRecurs();
             }
         }
