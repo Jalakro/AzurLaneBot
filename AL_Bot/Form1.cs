@@ -14,7 +14,7 @@ namespace AL_Bot
         bool SecScreenIsPos = false;
         int goalCounter = -1, goalNb;
         int goalCounterExercise = -1, goalNbExercise;
-        int RecursCounter = 0;
+        int RecursCounter = 3;
 
         Screen[] screens;
 
@@ -440,6 +440,8 @@ namespace AL_Bot
             DoMouseClick(1340, 960);
             Thread.Sleep(4000 * LowPerfModifier);
             DoMouseClick(1750, 800);
+
+            RecursCounter = 3;
         }
 
         private int CheckDoubleItem()
@@ -749,7 +751,11 @@ namespace AL_Bot
             {
                 DoMouseClick(1050, 970);
                 Thread.Sleep(1500 * LowPerfModifier);
-                RecursCounter--;
+                if(RecursCounter > 0)
+                {
+                    RecursCounter -= 1;
+                }
+                
                 QRCheckRecurs();
             }
         }
