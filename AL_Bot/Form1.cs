@@ -423,8 +423,10 @@ namespace AL_Bot
 
             //check quick retire a bien cliqué
             if(RecursCounter > 0)
-            QRCheckRecurs();
-
+            {
+                QRCheckRecurs();
+            }
+                
             DoMouseClick(1450, 930);
             Thread.Sleep(1500 * LowPerfModifier);
             DoMouseClick(1150, 720);
@@ -596,7 +598,7 @@ namespace AL_Bot
                             }
                         }
 
-                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 213 && PixelColor_[i][j].G >= 73 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 71 && PixelColor_[i][j].B <= 96 || /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
+                        if (/*croix rouge*/PixelColor_[i][j].R >= 193 && PixelColor_[i][j].R <= 218 && PixelColor_[i][j].G >= 73 && PixelColor_[i][j].G <= 98 && PixelColor_[i][j].B >= 71 && PixelColor_[i][j].B <= 96 || /*pixel dans bouton sort*/PixelColor_[i][j].R >= 47 && PixelColor_[i][j].R <= 67 && PixelColor_[i][j].G >= 91 && PixelColor_[i][j].G <= 111 && PixelColor_[i][j].B >= 146 && PixelColor_[i][j].B <= 166)
                         {
                             count++;
                         }
@@ -633,7 +635,7 @@ namespace AL_Bot
                 }
             }
             
-            if (/*croix rouge*/PixelColor.R >= 197 && PixelColor.R <= 209 && PixelColor.G >= 73 && PixelColor.G <= 98 && PixelColor.B >= 71 && PixelColor.B <= 96 && /*pixel dans bouton sort*/ PixelColor2.R >= 52 && PixelColor2.R <= 62 && PixelColor2.G >= 96 && PixelColor2.G <= 106 && PixelColor2.B >= 151 && PixelColor2.B <= 161)
+            if (/*croix rouge*/PixelColor.R >= 197 && PixelColor.R <= 218 && PixelColor.G >= 73 && PixelColor.G <= 98 && PixelColor.B >= 71 && PixelColor.B <= 96 && /*pixel dans bouton sort*/ PixelColor2.R >= 52 && PixelColor2.R <= 62 && PixelColor2.G >= 96 && PixelColor2.G <= 106 && PixelColor2.B >= 151 && PixelColor2.B <= 161)
             {
                 return true;
             }
@@ -749,10 +751,10 @@ namespace AL_Bot
             }
             if (!test)
             {
-                DoMouseClick(1050, 970);
-                Thread.Sleep(1500 * LowPerfModifier);
                 if(RecursCounter > 0)
                 {
+                    DoMouseClick(1050, 970);
+                    Thread.Sleep(1500 * LowPerfModifier);
                     RecursCounter -= 1;
                 }
                 
