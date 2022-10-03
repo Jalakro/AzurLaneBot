@@ -8,7 +8,7 @@ namespace AL_Bot
 {
     public partial class Form1 : Form
     {
-        bool MapFinishTest = false, DockFullTest = false, IsExercise = false, ExerciseAsked = false; 
+        bool MapFinishTest = false, DockFullTest = false, IsExercise = false, ExerciseAsked = false, opsiLaunched = false; 
         int DoubleMapItemTest = 0, ExerciseWinLoseTest = 0;
         int xMax = 0, yMax = 0;
         bool SecScreenIsPos = false;
@@ -29,6 +29,8 @@ namespace AL_Bot
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
+        private const uint MOUSEEVENTF_ABSOLUTE = 0x8000;
+        private const uint MOUSEEVENTF_MOVE = 0x0001;
         #endregion
         //
 
@@ -260,6 +262,22 @@ namespace AL_Bot
             }
         }
 
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (checkBox9.Checked == true)
+            {
+                opsiLaunched = false;
+                button13.Text = "Launch OpSi";
+                checkBox9.Checked = false;
+            }
+            else
+            {
+                opsiLaunched = true;
+                button13.Text = "Stop OpSi";
+                checkBox9.Checked = true;
+            }
+        }
+
 
 
         public void DoMouseClick(int X, int Y)
@@ -293,6 +311,62 @@ namespace AL_Bot
             mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)X, (uint)Y, 0, 0);
             Thread.Sleep(100 * LowPerfModifier);
 
+            Rectangle FullRect = new Rectangle(preXRect, preYRect, pre_width, pre_height);
+            Cursor.Clip = FullRect;
+
+            Cursor.Position = new Point(pre_x, pre_y);
+        }
+
+        public void DoMouseDragNDrop(int Drag_X, int Drag_Y, int Drop_X, int Drop_Y)
+        {
+            int pre_height = Cursor.Clip.Size.Height, pre_width = Cursor.Clip.Size.Width, preXRect = Cursor.Clip.X, preYRect = Cursor.Clip.Y;
+            int pre_x = Cursor.Position.X, pre_y = Cursor.Position.Y;
+
+            if (xMax != 1920 && yMax != 1080)
+            {
+                Drag_X = Drag_X * xMax / 1920;
+                Drag_Y = Drag_Y * yMax / 1080;
+                Drop_X = Drop_X * xMax / 1920;
+                Drop_Y = Drop_Y * yMax / 1080;
+            }
+
+            if (checkBox2.Checked == true)
+            {
+                if (SecScreenIsPos)
+                {
+                    Drag_X += xMax;
+                    Drop_X += xMax;
+                }
+                else
+                {
+                    Drag_X -= xMax;
+                    Drop_X -= xMax;
+                }
+            }
+
+            //first click
+            Rectangle BoundRect = new Rectangle(Drag_X, Drag_Y, 1, 1);
+            Cursor.Clip = BoundRect;
+
+            Thread.Sleep(100 * LowPerfModifier);
+            Cursor.Position = new Point(Drag_X, Drag_Y);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTDOWN, (uint)Drag_X, (uint)Drag_Y, 0, 0);
+            Thread.Sleep(100 * LowPerfModifier);
+
+            //move and drop
+            Thread.Sleep(250 * LowPerfModifier);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE, (uint)Drop_X, (uint)Drop_Y, 0, 0);
+
+            Rectangle BoundRect2 = new Rectangle(Drop_X, Drop_Y, 1, 1);
+            Cursor.Clip = BoundRect2;
+
+            Cursor.Position = new Point(Drop_X, Drop_Y);
+            Thread.Sleep(1000 * LowPerfModifier);
+            mouse_event(MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_LEFTUP, (uint)Drop_X, (uint)Drop_Y, 0, 0);
+            Thread.Sleep(100 * LowPerfModifier);
+
+
+            //end
             Rectangle FullRect = new Rectangle(preXRect, preYRect, pre_width, pre_height);
             Cursor.Clip = FullRect;
 
@@ -642,6 +716,7 @@ namespace AL_Bot
             return false;
         }
 
+
         private bool CheckQuickRetireClicked()
         {
             if (xMax != 1920 && yMax != 1080)
@@ -739,6 +814,7 @@ namespace AL_Bot
             }
             return false;
         }
+
 
         private void QRCheckRecurs()
         {
@@ -1074,6 +1150,11 @@ namespace AL_Bot
                     button11.Enabled = true;
                     button10.Enabled = true;
                 }
+            }
+
+            if(opsiLaunched)
+            {
+
             }
         }
 
