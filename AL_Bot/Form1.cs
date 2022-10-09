@@ -8,7 +8,7 @@ namespace AL_Bot
 {
     public partial class Form1 : Form
     {
-        bool MapFinishTest = false, DockFullTest = false, IsExercise = false, ExerciseAsked = false, opsiLaunched = false; 
+        bool MapFinishTest = false, DockFullTest = false, IsExercise = false, ExerciseAsked = false;
         int DoubleMapItemTest = 0, ExerciseWinLoseTest = 0;
         int xMax = 0, yMax = 0;
         bool SecScreenIsPos = false;
@@ -259,22 +259,6 @@ namespace AL_Bot
                 LowPerfModifier = 2;
                 button12.Text = "Disable";
                 checkBox8.Checked = true;
-            }
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            if (checkBox9.Checked == true)
-            {
-                opsiLaunched = false;
-                button13.Text = "Launch OpSi";
-                checkBox9.Checked = false;
-            }
-            else
-            {
-                opsiLaunched = true;
-                button13.Text = "Stop OpSi";
-                checkBox9.Checked = true;
             }
         }
 
@@ -1150,11 +1134,6 @@ namespace AL_Bot
                     button11.Enabled = true;
                     button10.Enabled = true;
                 }
-            }
-
-            if(opsiLaunched)
-            {
-
             }
         }
 

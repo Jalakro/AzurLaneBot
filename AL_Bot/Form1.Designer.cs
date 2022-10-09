@@ -56,14 +56,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Maps = new System.Windows.Forms.TabPage();
             this.Exercises = new System.Windows.Forms.TabPage();
-            this.Op_Si = new System.Windows.Forms.TabPage();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.button13 = new System.Windows.Forms.Button();
             this.Settings = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.Maps.SuspendLayout();
             this.Exercises.SuspendLayout();
-            this.Op_Si.SuspendLayout();
             this.Settings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -307,8 +303,8 @@
             // 
             this.tabControl1.Controls.Add(this.Maps);
             this.tabControl1.Controls.Add(this.Exercises);
-            this.tabControl1.Controls.Add(this.Op_Si);
             this.tabControl1.Controls.Add(this.Settings);
+            this.tabControl1.ItemSize = new System.Drawing.Size(48, 30);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -326,10 +322,10 @@
             this.Maps.Controls.Add(this.label1);
             this.Maps.Controls.Add(this.button7);
             this.Maps.Controls.Add(this.checkBox4);
-            this.Maps.Location = new System.Drawing.Point(4, 24);
+            this.Maps.Location = new System.Drawing.Point(4, 34);
             this.Maps.Name = "Maps";
             this.Maps.Padding = new System.Windows.Forms.Padding(3);
-            this.Maps.Size = new System.Drawing.Size(341, 314);
+            this.Maps.Size = new System.Drawing.Size(341, 304);
             this.Maps.TabIndex = 0;
             this.Maps.Text = "Maps";
             this.Maps.UseVisualStyleBackColor = true;
@@ -342,44 +338,13 @@
             this.Exercises.Controls.Add(this.checkBox7);
             this.Exercises.Controls.Add(this.button11);
             this.Exercises.Controls.Add(this.button5);
-            this.Exercises.Location = new System.Drawing.Point(4, 24);
+            this.Exercises.Location = new System.Drawing.Point(4, 34);
             this.Exercises.Name = "Exercises";
             this.Exercises.Padding = new System.Windows.Forms.Padding(3);
-            this.Exercises.Size = new System.Drawing.Size(341, 314);
+            this.Exercises.Size = new System.Drawing.Size(341, 304);
             this.Exercises.TabIndex = 1;
             this.Exercises.Text = "Exercises";
             this.Exercises.UseVisualStyleBackColor = true;
-            // 
-            // Op_Si
-            // 
-            this.Op_Si.Controls.Add(this.checkBox9);
-            this.Op_Si.Controls.Add(this.button13);
-            this.Op_Si.Location = new System.Drawing.Point(4, 24);
-            this.Op_Si.Name = "Op_Si";
-            this.Op_Si.Size = new System.Drawing.Size(341, 314);
-            this.Op_Si.TabIndex = 2;
-            this.Op_Si.Text = "Op_Si";
-            this.Op_Si.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(93, 23);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(162, 19);
-            this.checkBox9.TabIndex = 1;
-            this.checkBox9.Text = "Operation Sirien on going";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(111, 81);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(120, 48);
-            this.button13.TabIndex = 0;
-            this.button13.Text = "Launch OpSi";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // Settings
             // 
@@ -388,9 +353,9 @@
             this.Settings.Controls.Add(this.checkBox8);
             this.Settings.Controls.Add(this.checkBox2);
             this.Settings.Controls.Add(this.checkBox3);
-            this.Settings.Location = new System.Drawing.Point(4, 24);
+            this.Settings.Location = new System.Drawing.Point(4, 34);
             this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(341, 314);
+            this.Settings.Size = new System.Drawing.Size(341, 304);
             this.Settings.TabIndex = 3;
             this.Settings.Text = "Settings";
             this.Settings.UseVisualStyleBackColor = true;
@@ -414,8 +379,6 @@
             this.Maps.PerformLayout();
             this.Exercises.ResumeLayout(false);
             this.Exercises.PerformLayout();
-            this.Op_Si.ResumeLayout(false);
-            this.Op_Si.PerformLayout();
             this.Settings.ResumeLayout(false);
             this.Settings.PerformLayout();
             this.ResumeLayout(false);
@@ -450,9 +413,6 @@
         private TabControl tabControl1;
         private TabPage Maps;
         private TabPage Exercises;
-        private TabPage Op_Si;
         private TabPage Settings;
-        private Button button13;
-        private CheckBox checkBox9;
     }
 }
